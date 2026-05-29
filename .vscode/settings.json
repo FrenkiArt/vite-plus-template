@@ -1,48 +1,33 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+
+  // Отключаем Prettier полностью
+  "prettier.enable": false,
+  "prettier.requireConfig": false,
+
+  // Отключаем ESLint
+  "eslint.enable": false,
+
+  // Не форматируем Nunjucks и HTML
+  "[nunjucks]": {
+    "editor.formatOnSave": false
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact"
-  ],
-  "eslint.useFlatConfig": false,
-  "prettier.configPath": ".prettierrc.json",
+  "[html]": {
+    "editor.formatOnSave": false
+  },
+
+  // Твои полезные настройки
   "files.eol": "\n",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
+
+  // Emmet для Nunjucks
   "emmet.includeLanguages": {
     "nunjucks": "html"
   },
   "emmet.variables": {
     "lang": "ru"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[nunjucks]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
   }
 }

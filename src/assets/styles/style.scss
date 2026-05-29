@@ -1,6 +1,5 @@
-@import 'custom-variables';
-@import 'custom-bootstrap';
-@import 'rfs/scss';
+@import "custom-variables";
+@import "rfs/scss";
 
 :root {
   --swiper-theme-color: var(--color-primary);
@@ -42,7 +41,7 @@ body {
   min-height: 100dvh;
 
   font-optical-sizing: auto;
-  font-variation-settings: 'wdth' 100;
+  font-variation-settings: "wdth" 100;
   text-wrap: balance;
 
   [id] {
@@ -88,8 +87,8 @@ svg {
     stroke 0.3s;
 }
 
-[type='search'],
-[type='number'] {
+[type="search"],
+[type="number"] {
   -webkit-appearance: textfield;
   appearance: textfield;
 

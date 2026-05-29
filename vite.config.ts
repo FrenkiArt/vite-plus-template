@@ -1,0 +1,102 @@
+import {defineConfig} from "vite";
+import vituum from "vituum";
+import nunjucks from "@vituum/vite-plugin-nunjucks";
+import {visualizer} from "rollup-plugin-visualizer";
+import viteCompression from "vite-plugin-compression";
+import webfontDownload from "vite-plugin-webfont-dl";
+import VitePluginSvgSpritemap from "@spiriit/vite-plugin-svg-spritemap";
+
+const IMAGE_EXTS = ["png", "jpg", "jpeg", "gif", "avif", "webp"];
+const FONT_EXTS = ["eot", "ttf", "otf", "woff2", "woff"];
+
+export default defineConfig(({mode}) => ({
+  plugins: [
+    mode === "production" ? webfontDownload() : null,
+
+    mode === "production"
+      ? visualizer({
+          open: false,
+          template: "treemap",
+          gzipSize: true,
+          brotliSize: false,
+        })
+      : null,
+
+    mode === "production" ? viteCompression() : null,
+
+    vituum({
+      //watch: ["src/**/*.njk"],
+      pages: {
+        index: "src/pages/index.njk",
+      },
+    } as any),
+
+    nunjucks({
+      root: "./src",
+      globals: {
+        currentYear: new Date().getFullYear(),
+      },
+    }),
+
+    VitePluginSvgSpritemap("./src/icons/*.svg", {
+      prefix: "",
+      styles: false,
+      output: {
+        filename: "assets/svg/spritemap.svg",
+      },
+    }),
+  ],
+
+  server: {
+    open: true,
+    cors: true,
+    host: true,
+  },
+
+  css: {
+    devSourcemap: false,
+
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+        silenceDeprecations: [
+          "color-functions",
+          "global-builtin",
+          "import",
+          "if-function",
+        ],
+      },
+    },
+  },
+
+  build: {
+    cssCodeSplit: false,
+    sourcemap: false,
+    assetsInlineLimit: 0,
+
+    rollupOptions: {
+      output: {
+        entryFileNames: "assets/js/[name].js",
+        chunkFileNames: "assets/js/[name].js",
+
+        assetFileNames: (assetInfo: any) => {
+          const name: string = assetInfo.name ?? "asset.bin";
+          const ext = name.split(".").pop() ?? "bin";
+
+          if (IMAGE_EXTS.includes(ext)) return "assets/img/[name].[ext]";
+          if (ext === "svg") return "assets/svg/[name].[ext]";
+          if (["css", "scss"].includes(ext)) return "assets/css/[name].[ext]";
+          if (FONT_EXTS.includes(ext)) return "assets/fonts/[name].[ext]";
+
+          return "assets/[ext]/[name].[ext]";
+        },
+      },
+    },
+
+    minify: false,
+    //cssMinify: mode === "production",
+    cssMinifyOptions: {
+      target: "es2015",
+    },
+  },
+}));

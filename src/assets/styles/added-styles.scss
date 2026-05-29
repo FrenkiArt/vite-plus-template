@@ -1,4 +1,4 @@
-@use 'sass:color';
+@use "sass:color";
 
 .wrap-slider {
   padding-bottom: 32px;
@@ -74,4 +74,9 @@
       background-color: color.adjust(#ff8554, $lightness: -10%);
     }
   }
+}
+
+.test-block {
+  padding: 1em;
+  background-color: lightblue;
 }

@@ -147,9 +147,9 @@ $transition-collapse-width: width 0.35s ease;
   '16x9': calc(9 / 16 * 100%),
   '21x9': calc(9 / 21 * 100%),
 ); */
-// scss-docs-end aspect-ratios
 
-$font-family-base: 'Inter', sans-serif;
+// scss-docs-end aspect-ratios
+$font-family-base: "Inter", sans-serif;
 $font-size-base: 1rem;
 $font-size-sm: $font-size-base * 0.875;
 $font-size-lg: $font-size-base * 1.25;
