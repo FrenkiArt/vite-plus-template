@@ -1,0 +1,159 @@
+@import 'custom-variables';
+@import 'custom-bootstrap';
+@import 'rfs/scss';
+
+:root {
+  --swiper-theme-color: var(--color-primary);
+  --swiper-pagination-bullet-horizontal-gap: 10px;
+  interpolate-size: allow-keywords;
+
+  --header-height: 0px;
+
+  @media (min-width: 576px) {
+    --header-height: 0px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+/* * {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) #bdbdbd;
+} */
+
+/* *::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #bdbdbd;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 3px;
+} */
+
+body {
+  min-width: 320px;
+  min-height: 100dvh;
+
+  font-optical-sizing: auto;
+  font-variation-settings: 'wdth' 100;
+  text-wrap: balance;
+
+  [id] {
+    scroll-margin-block-start: var(--header-height, 0);
+  }
+}
+
+@media (min-width: 400px) {
+}
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  min-height: 100dvh;
+  // overflow: hidden;
+}
+
+.sec-head {
+  @include rfs(40px, margin-bottom);
+}
+
+.sec-title {
+  @include rfs(52px, font-size);
+  @include rfs(40px, margin-bottom);
+}
+
+.sec-subtitle {
+  @include rfs(22px, font-size);
+}
+
+svg {
+  transition:
+    fill 0.3s,
+    stroke 0.3s;
+}
+
+[type='search'],
+[type='number'] {
+  -webkit-appearance: textfield;
+  appearance: textfield;
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+// animation: delay-overflow 0.3s linear 0.3s 1 forwards;
+@keyframes delay-overflow {
+  from {
+    overflow: auto;
+  }
+
+  to {
+    overflow: auto;
+  }
+}
+
+@keyframes first-load {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes open {
+  from {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    content-visibility: visible;
+  }
+
+  to {
+    grid-template-rows: 1fr;
+    content-visibility: visible;
+    opacity: 1;
+  }
+}
+
+//color.adjust(#65b3e3, $lightness: -5%);
+
+::selection {
+  background-color: rgba($primary, 0.9);
+  color: $white;
+}
+
+::-moz-selection {
+  background-color: rgba($primary, 0.9);
+  color: $white;
+}
+
+.custom-rfs {
+  @include rfs(3rem, font-size);
+  @include rfs(4rem, border-radius);
+  @include rfs(2.5rem, padding);
+  background-color: rgba(#000, 0.05);
+}
+
+[data-gallery] [data-src] {
+  cursor: zoom-in;
+}

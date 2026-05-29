@@ -1,0 +1,25 @@
+{
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 80,
+  "jsxSingleQuote": false,
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "htmlWhitespaceSensitivity": "ignore",
+  "endOfLine": "auto",
+  "embeddedLanguageFormatting": "auto",
+  "quoteProps": "as-needed",
+  "arrowParens": "always",
+  "proseWrap": "preserve",
+  "plugins": ["@prettier/plugin-php", "prettier-plugin-jinja-template"],
+  "overrides": [
+    {
+      "files": ["*.njk", "*.nunjucks", "*.jinja", "*.jinja2"],
+      "options": {
+        "parser": "jinja-template"
+      }
+    }
+  ]
+}

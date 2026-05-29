@@ -1,0 +1,31 @@
+{% macro navLink(title) %}
+  <a class="nav__inner-link" href="#">{{ title }}</a>
+{% endmacro %}
+
+<div class="sec-nav bg-primary d-none d-lg-block" style="--bs-bg-opacity: .05;">
+  <div class="container">
+    <nav class="nav">
+      <ul class="nav__list">
+        {% for item in navigation.items %}
+          <li class="nav__item">
+            <a class="nav__link" href="{{ item.url | default('#') }}">
+              <span>{{ item.title }}</span>
+              <svg width="24" height="25">
+                <use href="assets/svg/sprite.svg#link-arrow"></use>
+              </svg>
+            </a>
+            <div class="nav__inner">
+              <div class="row">
+                <div class="col nav__inner-list">
+                  {% for sub in item.subitems %}
+                    {{ navLink(sub) }}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</div>
