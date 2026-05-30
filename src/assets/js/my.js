@@ -5,8 +5,21 @@ import { Modal } from 'bootstrap/js/dist/modal';
 
 import Swiper from 'swiper';
 import { Navigation, Pagination, EffectFade, Autoplay } from 'swiper/modules';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 Swiper.use([Navigation, Pagination, EffectFade, Autoplay]);
+
+// Инициализация Lenis (плавный скролл)
+const lenis = new Lenis({
+  autoRaf: true,
+});
+
+// Синхронизация Lenis + ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
 
 // Инициализация при загрузке DOM-дерева
 document.addEventListener('DOMContentLoaded', () => {

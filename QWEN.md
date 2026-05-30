@@ -113,7 +113,7 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 **Важно!** Проект работает в режиме **Nunjucks-шаблонизатора**, а не Fenom/MODX.
 
 - **Стек:** Vite.js + Nunjucks + Bootstrap 5.3 + SCSS (модульный)
-- **JS архитектура:** Vite автоматически собирает все `.js` файлы — явного entry-point не требуется (`/src/main.js` создаётся автоматически для всех шаблонов).
+- **JS архитектура:** Vite + Vituum автоматически генерирует entry point для каждой страницы, который подключает `/src/main.js`. Vituum (`pages` в `vite.config.ts`) контролирует, какие Nunjucks-шаблоны считаются страницами.
 - **CSS структура:** SCSS лежат в `src/assets/styles/`, импортируются в `main.scss`.
 - **robots.txt:** Блокирует весь сайт (для промежуточного этапа разработки).
 - **Фаза по умолчанию:** Фронтенд (чистая вёрстка на Vite + Nunjucks), без интеграции в MODX.
@@ -231,11 +231,13 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 
 ## ⚙️ Команды
 
-| Команда         | Описание                  |
-| --------------- | ------------------------- |
-| `npm run dev`   | Запуск сервера разработки |
-| `npm run build` | Сборка продакшена         |
-| `npm run lint`  | Проверка ESLint           |
+| Команда            | Описание                   |
+| ------------------ | -------------------------- |
+| `npx vp dev`       | Запуск сервера разработки  |
+| `npx vp build`     | Сборка продакшена          |
+| `npx oxlint .`     | Проверка линтером (oxlint) |
+| `npx oxfmt .`      | Форматирование (oxfmt)     |
+| `npm run archive-dist` | Архивирование собранного `dist/` |
 
 ---
 
@@ -243,78 +245,48 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 
 **Плагин:** `@spiriit/vite-plugin-svg-spritemap`
 
-### Настройка (`vite.config.js`)
+### Настройка (`vite.config.ts`)
 
-```javascript
-import VitePluginSvgSpritemap from '@spiriit/vite-plugin-svg-spritemap';
-
-export default defineConfig({
-  plugins: [
-    VitePluginSvgSpritemap('./src/icons/*.svg', {
-      prefix: '', // Убираем префикс 'sprite-'
-      route: '/svg/spritemap', // Путь к спрайту в папке /svg/
-      styles: false, // Не генерировать CSS-классы
-    }),
-  ],
-});
+```typescript
+VitePluginSvgSpritemap("./src/icons/*.svg", {
+  prefix: "",
+  styles: false,
+  output: {
+    filename: "assets/svg/spritemap.svg",
+  },
+}),
 ```
 
-### Как это работает
+**Dev режим (`npx vp dev`):**
 
-**Dev режим (`npm run dev`):**
+- Плагин создаёт **реальный файл** по пути `src/assets/svg/spritemap.svg`
+- Спрайт генерируется **на диске** и доступен по `/assets/svg/spritemap.svg`
 
-- Плагин создаёт **виртуальный endpoint** `/svg/spritemap`
-- Спрайт генерируется **в памяти** при запросе
-- Файл не создаётся на диске
+**Production сборка (`npx vp build`):**
 
-**Production сборка (`npm run build`):**
-
-- Плагин создаёт **реальный файл** в `dist/assets/spritemap.[hash].svg`
-- В HTML **автоматически подставляется** правильный путь с хэшем
-- Пример: `/svg/spritemap` → `/assets/spritemap.a13724f4.svg`
+- Файл остаётся в `dist/assets/svg/spritemap.[hash].svg`
+- Путь автоматически подставляется в HTML
 
 ### Использование
 
 ```html
 <svg class="sprite-icon" width="24" height="24">
-  <use xlink:href="/svg/spritemap#vite"></use>
+  <use xlink:href="/assets/svg/spritemap.svg#vite"></use>
 </svg>
 ```
-
-**Важно:** Плагин сам заменит путь на реальный при сборке!
-
-### Примеры
-
-| Файл                        | ID            | Использование                |
-| --------------------------- | ------------- | ---------------------------- |
-| `src/icons/vite.svg`        | `vite`        | `/svg/spritemap#vite`        |
-| `src/icons/menu.svg`        | `menu`        | `/svg/spritemap#menu`        |
-| `src/icons/arrow-right.svg` | `arrow-right` | `/svg/spritemap#arrow-right` |
-| `src/icons/logo.svg`        | `logo`        | `/svg/spritemap#logo`        |
-
-### Параметры плагина
-
-| Параметр | Значение           | Описание                                  |
-| -------- | ------------------ | ----------------------------------------- |
-| `prefix` | `''`               | Префикс для ID (по умолчанию `'sprite-'`) |
-| `route`  | `'/svg/spritemap'` | Виртуальный путь (заменится в build)      |
-| `styles` | `false`            | Генерировать ли CSS-классы                |
-
-### Ссылки
-
-- [Документация плагина](https://spiriitlabs.github.io/vite-plugin-svg-spritemap/)
-- [Опции: prefix](https://spiriitlabs.github.io/vite-plugin-svg-spritemap/options/prefix.html)
-- [Опции: route](https://spiriitlabs.github.io/vite-plugin-svg-spritemap/options/route.html)
-- [Опции: styles](https://spiriitlabs.github.io/vite-plugin-svg-spritemap/options/styles.html)
 
 ---
 
 ## ⚠️ Критичные правила (не путать с прошлым опытом!)
 
-1. **Не ищи `/src/main.js`** — он создаётся автоматически для каждого шаблона!
-2. **Не путай SCSS в `styles/` с CSS** — это source-файлы, их нужно компилировать через Vite.
-3. **Не удаляй файлы из `dist/`** — проект на промежуточном этапе, robots.txt блокирует всё намеренно.
-4. **Nunjucks ≠ Fenom** — в шаблонах используются `{% extends %}`, `{% include %}`, `{{ variable }}`, а не `{$_modx}`.
+1. **Команды через `npx vp`** — dev/build теперь через `vite-plus` (`npx vp dev`, `npx vp build`), а не через `npm run`.
+2. **Линтер — oxlint** — prettier и eslint удалены. Форматирование: `npx oxfmt .`, линтинг: `npx oxlint .`.
+3. **Конфиг — `vite.config.ts`** — старый `vite.config.js` переименован в `vite.config_old.js`.
+4. **Спрайт — новый путь** — иконки теперь доступны по `/assets/svg/spritemap.svg#id`, а не `/svg/spritemap#id`.
+5. **Не ищи `/src/main.js`** — он создаётся автоматически для каждого шаблона!
+6. **Не путай SCSS в `styles/` с CSS** — это source-файлы, их нужно компилировать через Vite.
+7. **Не удаляй файлы из `dist/`** — проект на промежуточном этапе, robots.txt блокирует всё намеренно.
+8. **Nunjucks ≠ Fenom** — в шаблонах используются `{% extends %}`, `{% include %}`, `{{ variable }}`, а не `{$_modx}`.
 
 ---
 

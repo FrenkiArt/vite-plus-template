@@ -1,10 +1,10 @@
-# Vite + Nunjucks Builder (vite-js-builder)
+# Vite Plus Template
 
-**Актуальная версия:** 2.0.0 (февраль 2026)
+**Актуальная версия:** 3.0.0 (май 2026)
 
-> Быстрый старт для вёрстки сайтов с использованием **Vite**, **Vituum** и **Nunjucks**.  
-> Шаблонизатор выбран из-за его схожести с Fenom (используется в MODX Revolution), что позволяет легко переносить готовую вёрстку в CMS.  
-> Проект построен на **Vituum** для удобной работы с многостраничными сайтами и компонентами.
+> Быстрый старт для вёрстки сайтов на **Vite + Vituum + Nunjucks** с форматированием через **oxlint/oxfmt**.  
+> Сборка осуществляется через **vite-plus** — Vite-обёртка с предустановленными оптимизациями и плагинами.  
+> Шаблонизатор выбран из-за схожести с Fenom (MODX Revolution) для лёгкого переноса в CMS.
 
 ---
 
@@ -19,7 +19,7 @@
 - 🧩 Близко к MODX — структура layouts/components/pages напоминает чанки и шаблоны
 - 🎨 SCSS + автопрефиксы
 - 🖼 SVG-спрайт — автоматическая сборка всех иконок
-- 🔧 Prettier — форматирование кода
+- 🔧 oxlint/oxfmt — быстрый линтинг и форматирование
 - 📦 Продакшн-сборка — минификация, оптимизация ассетов
 
 ---
@@ -37,13 +37,13 @@ npm install
 
 ### 3. Запуск сервера разработки
 
-npm run dev
+npx vp dev
 
 После запуска откроется браузер с главной страницей. Все изменения применяются мгновенно.
 
 ### 4. Сборка для продакшена
 
-npm run build
+npx vp build
 
 Готовые файлы появятся в `dist/`.
 
@@ -52,32 +52,36 @@ npm run build
 ## Структура проекта
 
 vite-template/
-├── public/  
+├── public/
 ├── src/
-│ ├── assets/  
-│ │ ├── css/
-│ │ │ └── main.scss
+│ ├── assets/
+│ │ ├── styles/
+│ │ │ ├── main.scss
+│ │ │ ├── custom-bootstrap.scss
+│ │ │ ├── custom-variables.scss
+│ │ │ └── ...
 │ │ └── js/
-│ │ └── main.js
-│ ├── components/  
+│ │   ├── main.js
+│ │   └── my.js
+│ ├── components/
 │ │ ├── header.njk
 │ │ ├── footer.njk
-│ │ └── sec-nav.njk
-│ ├── data/  
+│ │ └── ...
+│ ├── data/
 │ │ ├── site.json
 │ │ └── menu.json
-│ ├── icons/  
+│ ├── icons/
 │ │ ├── geo.svg
-│ │ ├── link-arrow.svg
 │ │ └── ...
-│ ├── layouts/  
+│ ├── layouts/
 │ │ └── base.njk
-│ └── pages/  
-│ ├── index.njk
-│ └── contacts.njk
-├── .prettierrc.json
+│ └── pages/
+│   ├── index.njk
+│   └── contacts.njk
+├── oxfmt.config.json
+├── oxlint.config.json
 ├── package.json
-└── vite.config.js
+└── vite.config.ts
 
 ---
 
@@ -103,12 +107,12 @@ vite-template/
 
 ## SVG-спрайт
 
-Плагин @spiriit/vite-plugin-svg-spritemap собирает все SVG в `/__spritemap`.
+Плагин @spiriit/vite-plugin-svg-spritemap собирает все SVG в `/assets/svg/spritemap.svg`.
 
 ### Использование
 
 <svg class="sprite-icon">
-  <use xlink:href="/__spritemap#sprite-geo"></use>
+  <use xlink:href="/assets/svg/spritemap.svg#geo"></use>
 </svg>
 
 ### Стилизация
@@ -127,32 +131,33 @@ vertical-align: middle;
 
 - Vite
 - Vituum
+- vite-plus
 - Nunjucks
 - SCSS
-- Prettier
+- oxlint / oxfmt
 - rollup-plugin-visualizer
 - vite-plugin-webfont-dl
+- vite-plugin-compression
 - @spiriit/vite-plugin-svg-spritemap
+- Bootstrap 5.3
+- GSAP + ScrollTrigger
+- Lenis
+- Swiper
+- lightGallery
 
 ---
 
 ## Конфигурация
 
-Основной файл — vite.config.js.
+Основной файл — `vite.config.ts` (TypeScript). Плагины подключаются условно в зависимости от режима (только `production` или всегда).
 
-Подключены:
-
-- vituum()
-- @vituum/vite-plugin-nunjucks
-- @spiriit/vite-plugin-svg-spritemap
-- visualizer()
-- webfontDownload()
+Старый JS-конфиг сохранён как `vite.config_old.js`.
 
 ---
 
 ## Перенос в MODX
 
-1. npm run build
+1. npx vp build
 2. Скопировать dist/ в assets/templates/
 3. Заменить переменные:
 
@@ -176,7 +181,7 @@ Nunjucks → MODX
 - MODX-friendly
 - SCSS + autoprefixer
 - SVG spritemap
-- Prettier
+- oxlint / oxfmt
 - Production build
 
 ---
@@ -186,8 +191,8 @@ Nunjucks → MODX
 git clone https://github.com/FrenkiArt/vite-template.git your-project
 cd your-project
 npm install
-npm run dev
-npm run build
+npx vp dev
+npx vp build
 
 ---
 
@@ -207,12 +212,16 @@ Same usage as above.
 
 - Vite
 - Vituum
+- vite-plus
 - Nunjucks
 - SCSS
-- Prettier
+- oxlint / oxfmt
 - rollup-plugin-visualizer
 - vite-plugin-webfont-dl
 - @spiriit/vite-plugin-svg-spritemap
+- Bootstrap 5.3
+- GSAP
+- Swiper
 
 ---
 

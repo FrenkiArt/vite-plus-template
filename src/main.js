@@ -21,6 +21,7 @@ import 'lightgallery/css/lightgallery.css';
 // my
 import './assets/styles/custom-bootstrap.scss';
 import './assets/styles/main.scss';
+import 'lenis/dist/lenis.css';
 
 //import './assets/js/qwiz.js';
 //import './assets/js/tabs.js';
