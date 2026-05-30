@@ -41,8 +41,15 @@ export default defineConfig(({mode}) => ({
     VitePluginSvgSpritemap("./src/icons/*.svg", {
       prefix: "",
       styles: false,
+      route: {
+        url: '/assets/svg/spritemap.svg',
+        name: 'Sprite icons',
+      },
       output: {
-        filename: "assets/svg/spritemap.svg",
+        filename: '/svg/spritemap.svg',
+        name: 'spritemap',
+        view: true,
+        use: true,
       },
     }),
   ],
