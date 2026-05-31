@@ -206,9 +206,7 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 
 ```html
 <!-- ✅ Правильно: Bootstrap + утилиты -->
-<h2 class="section-title text-white mb-4 fs-3 fw-bold ff-unbounded">
-  Заголовок
-</h2>
+<h2 class="section-title text-white mb-4 fs-3 fw-bold ff-unbounded">Заголовок</h2>
 
 <!-- ✅ Правильно: БЭМ для уникальных блоков -->
 <article class="card">
@@ -231,12 +229,12 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 
 ## ⚙️ Команды
 
-| Команда            | Описание                   |
-| ------------------ | -------------------------- |
-| `npx vp dev`       | Запуск сервера разработки  |
-| `npx vp build`     | Сборка продакшена          |
-| `npx oxlint .`     | Проверка линтером (oxlint) |
-| `npx oxfmt .`      | Форматирование (oxfmt)     |
+| Команда                | Описание                         |
+| ---------------------- | -------------------------------- |
+| `npx vp dev`           | Запуск сервера разработки        |
+| `npx vp build`         | Сборка продакшена                |
+| `npx oxlint .`         | Проверка линтером (oxlint)       |
+| `npx oxfmt .`          | Форматирование (oxfmt)           |
 | `npm run archive-dist` | Архивирование собранного `dist/` |
 
 ---
