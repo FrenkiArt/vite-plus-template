@@ -23,7 +23,7 @@
 ### Подключение на страницу
 
 ```html
-<link rel="stylesheet" href="qwiz.css">
+<link rel="stylesheet" href="qwiz.css" />
 <script src="qwiz.js"></script>
 ```
 
@@ -99,6 +99,7 @@
 ```
 
 Экземпляр будет доступен через:
+
 - `window.mainQuiz` (по ID из `data-qwiz`)
 - `form._qwizInstance` (напрямую на элементе формы)
 
@@ -112,7 +113,7 @@ const qwiz = new QwizSlider('[data-qwiz="mainQuiz"]', {
   autoNextDelay: 300,
   animationDuration: 400,
   firstActiveSlide: 1,
-  autoFocus: true
+  autoFocus: true,
 });
 
 // Сохраняем для дальнейшего использования
@@ -123,18 +124,23 @@ window.myQwiz = qwiz;
 
 ## Data атрибуты (настройки в HTML)
 
-| Атрибут | Значение | Описание |
-|---------|----------|---------|
-| `data-qwiz` | строка | ID квиза (обязателен) |
-| `data-auto-next` | `true` / `false` | Включить автоматический переход при выборе |
-| `data-auto-next-delay` | число (мс) | Задержка перед автоматическим переходом |
-| `data-animation-duration` | число (мс) | Длительность анимации переходов |
+| Атрибут                   | Значение         | Описание                                   |
+| ------------------------- | ---------------- | ------------------------------------------ |
+| `data-qwiz`               | строка           | ID квиза (обязателен)                      |
+| `data-auto-next`          | `true` / `false` | Включить автоматический переход при выборе |
+| `data-auto-next-delay`    | число (мс)       | Задержка перед автоматическим переходом    |
+| `data-animation-duration` | число (мс)       | Длительность анимации переходов            |
 
 ### Примеры
 
 ```html
 <!-- С автоскроллом и быстрой анимацией -->
-<form data-qwiz="quiz1" data-auto-next="true" data-auto-next-delay="200" data-animation-duration="250">
+<form
+  data-qwiz="quiz1"
+  data-auto-next="true"
+  data-auto-next-delay="200"
+  data-animation-duration="250"
+>
   <!-- слайды -->
 </form>
 
@@ -148,23 +154,23 @@ window.myQwiz = qwiz;
 
 ## Опции конструктора
 
-| Опция | Тип | По умолчанию | Описание |
-|-------|-----|--------------|---------|
-| `animationDuration` | число (мс) | 300 | Длительность анимации перехода между слайдами |
-| `firstActiveSlide` | число | 1 | С какого слайда (номер) разрешён переход назад |
-| `autoFocus` | boolean | true | Автоматически фокусировать выбранный или первый инпут |
-| `autoNextOnChange` | boolean | false | Автоматический переход к следующему шагу при выборе radio/checkbox |
-| `autoNextDelay` | число (мс) | 300 | Задержка перед автоматическим переходом |
+| Опция               | Тип        | По умолчанию | Описание                                                           |
+| ------------------- | ---------- | ------------ | ------------------------------------------------------------------ |
+| `animationDuration` | число (мс) | 300          | Длительность анимации перехода между слайдами                      |
+| `firstActiveSlide`  | число      | 1            | С какого слайда (номер) разрешён переход назад                     |
+| `autoFocus`         | boolean    | true         | Автоматически фокусировать выбранный или первый инпут              |
+| `autoNextOnChange`  | boolean    | false        | Автоматический переход к следующему шагу при выборе radio/checkbox |
+| `autoNextDelay`     | число (мс) | 300          | Задержка перед автоматическим переходом                            |
 
 ### Пример использования всех опций
 
 ```js
 const qwiz = new QwizSlider('[data-qwiz="advancedQuiz"]', {
-  animationDuration: 400,      // Плавная анимация
-  firstActiveSlide: 2,         // Можно вернуться со 2-го слайда
-  autoFocus: true,             // Фокусировать выбранный элемент
-  autoNextOnChange: true,      // Переход при выборе
-  autoNextDelay: 500           // С задержкой в пол-секунды
+  animationDuration: 400, // Плавная анимация
+  firstActiveSlide: 2, // Можно вернуться со 2-го слайда
+  autoFocus: true, // Фокусировать выбранный элемент
+  autoNextOnChange: true, // Переход при выборе
+  autoNextDelay: 500, // С задержкой в пол-секунды
 });
 ```
 
@@ -175,6 +181,7 @@ const qwiz = new QwizSlider('[data-qwiz="advancedQuiz"]', {
 ### Навигация
 
 #### `next()`
+
 Переход к следующему слайду (если текущий валиден).
 
 ```js
@@ -182,6 +189,7 @@ qwiz.next(); // true или false (успех/неудача)
 ```
 
 #### `prev()`
+
 Переход к предыдущему слайду.
 
 ```js
@@ -189,24 +197,27 @@ qwiz.prev(); // true или false
 ```
 
 #### `goToSlide(index, skipValidation = false)`
+
 Переход к слайду по индексу (начинается с 0).
 
 ```js
-qwiz.goToSlide(2);           // К 3-му слайду
-qwiz.goToSlide(2, true);     // Пропустить валидацию
+qwiz.goToSlide(2); // К 3-му слайду
+qwiz.goToSlide(2, true); // Пропустить валидацию
 ```
 
 #### `goToSlideNumber(slideNumber, skipValidation = false)`
+
 Переход к слайду по номеру (начинается с 1).
 
 ```js
-qwiz.goToSlideNumber(3);     // К 3-му слайду (более удобно)
+qwiz.goToSlideNumber(3); // К 3-му слайду (более удобно)
 qwiz.goToSlideNumber(3, true); // Без валидации
 ```
 
 ### Получение информации
 
 #### `getCurrentSlideIndex()`
+
 Возвращает текущий индекс (с 0).
 
 ```js
@@ -214,6 +225,7 @@ const index = qwiz.getCurrentSlideIndex(); // 0, 1, 2...
 ```
 
 #### `getCurrentSlideNumber()`
+
 Возвращает текущий номер (с 1).
 
 ```js
@@ -221,6 +233,7 @@ const number = qwiz.getCurrentSlideNumber(); // 1, 2, 3...
 ```
 
 #### `getTotalSlides()`
+
 Возвращает общее количество слайдов.
 
 ```js
@@ -228,6 +241,7 @@ const total = qwiz.getTotalSlides(); // Например: 7
 ```
 
 #### `getFormData()`
+
 Возвращает объект с данными всей формы.
 
 ```js
@@ -238,6 +252,7 @@ console.log(data); // { answer1: "option2", email: "user@example.com" }
 ### Управление состоянием
 
 #### `reset()`
+
 Сброс формы и возврат к первому слайду.
 
 ```js
@@ -245,6 +260,7 @@ qwiz.reset();
 ```
 
 #### `destroy()`
+
 Уничтожение экземпляра и очистка обработчиков.
 
 ```js
@@ -257,15 +273,16 @@ qwiz = null; // Удалить ссылку
 ## События
 
 ### `qwiz:slideChanged`
+
 Вызывается при переходе на новый слайд.
 
 ```js
 const form = document.querySelector('[data-qwiz="mainQuiz"]');
 
-form.addEventListener('qwiz:slideChanged', (e) => {
-  console.log('Текущий слайд:', e.detail.currentIndex + 1);
-  console.log('Всего слайдов:', e.detail.totalSlides);
-  
+form.addEventListener("qwiz:slideChanged", (e) => {
+  console.log("Текущий слайд:", e.detail.currentIndex + 1);
+  console.log("Всего слайдов:", e.detail.totalSlides);
+
   // Пример: показать прогресс
   const progress = ((e.detail.currentIndex + 1) / e.detail.totalSlides) * 100;
   console.log(`Прогресс: ${progress}%`);
@@ -273,18 +290,19 @@ form.addEventListener('qwiz:slideChanged', (e) => {
 ```
 
 ### `qwiz:submit`
+
 Вызывается при отправке формы.
 
 ```js
-form.addEventListener('qwiz:submit', (e) => {
+form.addEventListener("qwiz:submit", (e) => {
   const formData = e.detail.formData;
-  console.log('Отправляем данные:', formData);
-  
+  console.log("Отправляем данные:", formData);
+
   // Отправить на сервер
-  fetch('/api/quiz', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData)
+  fetch("/api/quiz", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
   });
 });
 ```
@@ -301,6 +319,7 @@ form.addEventListener('qwiz:submit', (e) => {
 4. **Срабатывает сразу** — не ждёт завершения анимации перехода
 
 Пример:
+
 ```html
 <div data-qwiz-slide="2">
   <label>
@@ -337,12 +356,12 @@ form.addEventListener('qwiz:submit', (e) => {
 
 <script src="qwiz.js"></script>
 <script>
-document.querySelector('[data-qwiz="simpleQuiz"]').addEventListener('qwiz:slideChanged', (e) => {
-  if (e.detail.currentIndex === 1) {
-    const selected = document.querySelector('input[name="lang"]:checked').value;
-    document.getElementById('selected').textContent = selected;
-  }
-});
+  document.querySelector('[data-qwiz="simpleQuiz"]').addEventListener("qwiz:slideChanged", (e) => {
+    if (e.detail.currentIndex === 1) {
+      const selected = document.querySelector('input[name="lang"]:checked').value;
+      document.getElementById("selected").textContent = selected;
+    }
+  });
 </script>
 ```
 
@@ -363,13 +382,13 @@ document.querySelector('[data-qwiz="simpleQuiz"]').addEventListener('qwiz:slideC
 
 <script src="qwiz.js"></script>
 <script>
-const form = document.querySelector('[data-qwiz="progressQuiz"]');
-const progressBar = document.getElementById('progressBar');
+  const form = document.querySelector('[data-qwiz="progressQuiz"]');
+  const progressBar = document.getElementById("progressBar");
 
-form.addEventListener('qwiz:slideChanged', (e) => {
-  const progress = ((e.detail.currentIndex + 1) / e.detail.totalSlides) * 100;
-  progressBar.style.width = progress + '%';
-});
+  form.addEventListener("qwiz:slideChanged", (e) => {
+    const progress = ((e.detail.currentIndex + 1) / e.detail.totalSlides) * 100;
+    progressBar.style.width = progress + "%";
+  });
 </script>
 ```
 
@@ -379,25 +398,25 @@ form.addEventListener('qwiz:slideChanged', (e) => {
 // Инициализация
 const qwiz = new QwizSlider('[data-qwiz="controlledQuiz"]', {
   autoNextOnChange: false,
-  animationDuration: 500
+  animationDuration: 500,
 });
 
 // Кнопка для перехода к конкретному вопросу
-document.getElementById('jumpToQuestion3').addEventListener('click', () => {
+document.getElementById("jumpToQuestion3").addEventListener("click", () => {
   qwiz.goToSlideNumber(3);
 });
 
 // Показать текущий прогресс
-document.getElementById('progressBtn').addEventListener('click', () => {
+document.getElementById("progressBtn").addEventListener("click", () => {
   const current = qwiz.getCurrentSlideNumber();
   const total = qwiz.getTotalSlides();
   alert(`Вы на вопросе ${current} из ${total}`);
 });
 
 // Отправить форму вручную
-document.getElementById('submitBtn').addEventListener('click', () => {
+document.getElementById("submitBtn").addEventListener("click", () => {
   const data = qwiz.getFormData();
-  console.log('Отправляем:', data);
+  console.log("Отправляем:", data);
   // Отправить на сервер...
 });
 ```
@@ -444,39 +463,41 @@ document.getElementById('submitBtn').addEventListener('click', () => {
 ## Советы и рекомендации
 
 ### 1. Валидация полей
+
 Используй атрибут `required` на инпутах для обязательных полей:
 
 ```html
-<input type="email" name="email" required />
-<input type="radio" name="choice" value="a" required />
+<input type="email" name="email" required /> <input type="radio" name="choice" value="a" required />
 ```
 
 ### 2. Обработка отправки
+
 Используй событие `qwiz:submit` для обработки данных:
 
 ```js
-form.addEventListener('qwiz:submit', (e) => {
+form.addEventListener("qwiz:submit", (e) => {
   // Отправить на сервер, показать сообщение и т.д.
 });
 ```
 
 ### 3. Анимация с задержкой
+
 Настрой `autoNextDelay` для времени, достаточного пользователю прочитать вопрос:
 
 ```html
-<form data-qwiz="timed" data-auto-next="true" data-auto-next-delay="1000">
+<form data-qwiz="timed" data-auto-next="true" data-auto-next-delay="1000"></form>
 ```
 
 ### 4. Доступность
+
 Убедись, что кнопки имеют корректные `type` и `aria-label`:
 
 ```html
-<button data-qwiz-btn-next type="button" aria-label="Перейти к следующему вопросу">
-  Далее
-</button>
+<button data-qwiz-btn-next type="button" aria-label="Перейти к следующему вопросу">Далее</button>
 ```
 
 ### 5. Адаптивный дизайн
+
 Квиз автоматически адаптируется под размер контейнера:
 
 ```css
@@ -488,11 +509,12 @@ form.addEventListener('qwiz:submit', (e) => {
 ```
 
 ### 6. Отключение автофокуса
+
 Если нужно отключить автоматическую фокусировку:
 
 ```js
 const qwiz = new QwizSlider('[data-qwiz="noFocus"]', {
-  autoFocus: false
+  autoFocus: false,
 });
 ```
 
@@ -501,24 +523,29 @@ const qwiz = new QwizSlider('[data-qwiz="noFocus"]', {
 ## Устранение проблем
 
 ### Квиз не инициализируется
+
 - Проверь, что `data-qwiz="ID"` указан на форме
 - Убедись, что скрипт загружен после HTML
 - Проверь консоль браузера на ошибки
 
 ### Кнопка "Далее" не работает
+
 - Проверь, что есть обязательные поля (`required`)
 - Убедись, что они заполнены перед переходом
 - Проверь консоль на предупреждения QwizSlider
 
 ### Первый слайд не видно
+
 - Добавь `class="active"` на первый `[data-qwiz-slide]`
 - Проверь, что подключены стили `qwiz.css`
 
 ### Переход происходит медленнее ожидаемого
+
 - Увеличь/уменьши `animationDuration`
 - Проверь, не блокирует ли что-нибудь `JavaScript` главный поток
 
 ### Автофокус не работает
+
 - Убедись, что `autoFocus: true` в опциях (по умолчанию включено)
 - Проверь, что на слайде есть интерактивные элементы (input, textarea, select)
 - Убедись, что элемент не имеет атрибута `disabled`
@@ -528,11 +555,13 @@ const qwiz = new QwizSlider('[data-qwiz="noFocus"]', {
 ## История обновлений
 
 ### v1.1.0
+
 - ✨ Добавлен умный автофокус (фокусирует выбранный элемент при возврате на слайд)
 - ✨ Автофокус теперь срабатывает сразу, не ждёт конца анимации
 - 🐛 Исправлена проблема с фокусировкой при инициализации
 
 ### v1.0.0
+
 - 🎉 Первая версия класса QwizSlider
 
 ---
