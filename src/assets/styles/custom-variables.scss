@@ -21,8 +21,8 @@ $light: $gray-100;
 $dark: $gray-900;
 
 $theme-colors: (
-  'primary': $primary,
-  'secondary': $secondary,
+  "primary": $primary,
+  "secondary": $secondary,
   //"success":    $success,
   //"info":       $info,
   //"warning":    $warning,
@@ -159,9 +159,12 @@ $line-height-base: 1.5;
 $line-height-sm: 1.25;
 $line-height-lg: 2;
 
-$h1-font-size: $font-size-base * 2.5;
-$h2-font-size: $font-size-base * 2;
-$h3-font-size: $font-size-base * 1.75;
+//$h1-font-size: $font-size-base * 2.5;
+$h1-font-size: $font-size-base * 4;
+//$h2-font-size: $font-size-base * 2;
+$h2-font-size: $font-size-base * 3;
+//$h3-font-size: $font-size-base * 1.75;
+$h3-font-size: $font-size-base * 2;
 $h4-font-size: $font-size-base * 1.5;
 $h5-font-size: $font-size-base * 1.25;
 $h6-font-size: $font-size-base;
@@ -170,20 +173,23 @@ $h6-font-size: $font-size-base;
 $headings-margin-bottom: $spacer * 0.5;
 $headings-font-family: null;
 $headings-font-style: null;
-$headings-font-weight: 500;
+$headings-font-weight: 700;
 $headings-line-height: 1.2;
 $headings-color: inherit;
 // scss-docs-end headings-variables
 
 // scss-docs-start display-headings
-$display-font-sizes: (
-  1: 5rem,
-  2: 4.5rem,
-  3: 4rem,
-  4: 3.5rem,
-  5: 3rem,
-  6: 2.5rem,
-);
+$display-font-sizes: ();
+// отключено — .display-* не генерируются
+// $display-font-sizes: (
+//   1: 5rem,
+//   2: 4.5rem,
+//   3: 4rem,
+//   4: 3.5rem,
+//   5: 3rem,
+//   6: 2.5rem,
+// );
+
 $display-font-family: null;
 $display-font-style: null;
 $display-font-weight: 300;
@@ -443,7 +449,7 @@ $breadcrumb-item-padding-x: 0.5rem;
 $breadcrumb-margin-bottom: 0rem;
 $breadcrumb-divider-color: var(--bs-secondary-color);
 $breadcrumb-active-color: var(--bs-secondary-color);
-$breadcrumb-divider: quote('/');
+$breadcrumb-divider: quote("/");
 // scss-docs-end breadcrumb-variables
 
 // Close
