@@ -1,4 +1,4 @@
-@use 'sass:math';
+@use "sass:math";
 
 /* input[type="range"]:focus,
 input[type="number"]:focus {
@@ -6,7 +6,7 @@ input[type="number"]:focus {
   outline: none;
 } */
 
-input[type='range'] {
+input[type="range"] {
   -webkit-appearance: none;
 
   height: 6px;
@@ -23,7 +23,7 @@ input[type='range'] {
 }
 
 /* Input Thumb */
-input[type='range']::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 14px;
   width: 14px;
@@ -39,7 +39,7 @@ input[type='range']::-webkit-slider-thumb {
   }
 }
 
-input[type='range']::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
   height: 14px;
   width: 14px;
@@ -55,7 +55,7 @@ input[type='range']::-moz-range-thumb {
   }
 }
 
-input[type='range']::-ms-thumb {
+input[type="range"]::-ms-thumb {
   -webkit-appearance: none;
   height: 14px;
   width: 14px;
@@ -71,34 +71,34 @@ input[type='range']::-ms-thumb {
   }
 }
 
-input[type='range']::-webkit-slider-thumb:hover {
+input[type="range"]::-webkit-slider-thumb:hover {
   background: #ffa424;
 }
 
-input[type='range']::-moz-range-thumb:hover {
+input[type="range"]::-moz-range-thumb:hover {
   background: #ffa424;
 }
 
-input[type='range']::-ms-thumb:hover {
+input[type="range"]::-ms-thumb:hover {
   background: #ffa424;
 }
 
 /* Input Track */
-input[type='range']::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   box-shadow: none;
   border: none;
   background: transparent;
 }
 
-input[type='range']::-moz-range-track {
+input[type="range"]::-moz-range-track {
   -webkit-appearance: none;
   box-shadow: none;
   border: none;
   background: transparent;
 }
 
-input[type='range']::-ms-track {
+input[type="range"]::-ms-track {
   -webkit-appearance: none;
   box-shadow: none;
   border: none;
@@ -108,7 +108,7 @@ input[type='range']::-ms-track {
 .select {
   appearance: none;
   background-color: #f0f0f0;
-  background-image: url('/assets/svg/select-bottom.svg');
+  background-image: url("/assets/svg/select-bottom.svg");
   background-position: right 1rem center;
   background-repeat: no-repeat;
   border-radius: 2px;
@@ -116,8 +116,8 @@ input[type='range']::-ms-track {
   color: #000000;
   cursor: pointer;
   font-feature-settings:
-    'pnum' on,
-    'lnum' on;
+    "pnum" on,
+    "lnum" on;
   font-size: 20px;
   height: 64px;
   padding: 0.5rem 2rem 0.5rem 1rem;
@@ -135,7 +135,7 @@ input[type='range']::-ms-track {
   // .select--alt
   &--alt {
     background-color: #0b109f;
-    background-image: url('/assets/svg/select-bottom-alt.svg');
+    background-image: url("/assets/svg/select-bottom-alt.svg");
     border: 1px solid #0b109f;
     color: #ffffff;
   }

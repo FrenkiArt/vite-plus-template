@@ -1,6 +1,6 @@
-@use 'sass:color';
+@use "sass:color";
 
-a:not([class^='link-']):not([class*=' link-']) {
+a:not([class^="link-"]):not([class*=" link-"]) {
   //text-decoration-color: color-mix(in srgb, currentColor 33%, transparent);
   //--bs-link-color-rgb
   //--bs-link-hover-color-rgb
@@ -31,8 +31,8 @@ a {
   }
 }
 
-[class^='link-'],
-[class*=' link-'] {
+[class^="link-"],
+[class*=" link-"] {
   --bs-link-underline-opacity: 0.33;
 
   &:hover,
