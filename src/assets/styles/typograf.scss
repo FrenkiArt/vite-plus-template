@@ -1,3 +1,5 @@
+@import "rfs/scss";
+
 @supports (text-box: trim-both) {
   h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,
   .fs-1, .fs-2, .fs-3, .fs-4, .fs-5, .fs-6,
@@ -15,7 +17,7 @@ h1,
   font-weight: 300;
   line-height: 1.143;
   letter-spacing: -0.045em;
-  margin-bottom: 1.5rem;
+  @include rfs(1.5rem, margin-bottom);
 
 }
 
@@ -24,7 +26,7 @@ h2,
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.035em;
-  margin-bottom: 1.5rem;
+  @include rfs(1.5rem, margin-bottom);
 
 }
 
@@ -33,7 +35,7 @@ h3,
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.01em;
-  margin-bottom: 1.5rem;
+  @include rfs(1.5rem, margin-bottom);
 
 }
 
@@ -42,7 +44,7 @@ h4,
   font-weight: 700;
   line-height: 1.333;
   letter-spacing: normal;
-  margin-bottom: 1.5rem;
+  @include rfs(1.5rem, margin-bottom);
 
 }
 
@@ -51,7 +53,7 @@ h5,
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: normal;
-  margin-bottom: 1.5rem;
+  @include rfs(1.5rem, margin-bottom);
 
 }
 
@@ -60,18 +62,20 @@ h6,
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: normal;
-  margin-bottom: 1.5rem;
+  @include rfs(1.5rem, margin-bottom);
 
 }
 
 .lead {
   line-height: 1.2;
-  margin-bottom: 1.5rem;
+  @include rfs(1.5rem, margin-bottom);
+}
+
 }
 
 .blockquote-footer {
   margin-top: 0;
-  margin-bottom: 1.5rem;
+  @include rfs(1.5rem, margin-bottom);
 }
 
 p:last-child,
