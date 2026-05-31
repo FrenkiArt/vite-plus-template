@@ -1,1 +1,65 @@
+h1,
+.h1 {
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
 
+h2,
+.h2 {
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+h3,
+.h3 {
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h4,
+.h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+}
+
+h5,
+.h5 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+}
+
+h6,
+.h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+}
+
+.fs-1 {
+  letter-spacing: -0.015em;
+}
+
+.fs-2 {
+  letter-spacing: -0.015em;
+}
+
+.fs-3 {
+  letter-spacing: -0.01em;
+}
+
+.fs-4,
+.fs-5,
+.fs-6 {
+  letter-spacing: normal;
+}
+
+@each $level, $size in $display-font-sizes {
+  .display-#{$level} {
+    letter-spacing: calc(-0.0035em * (7 - $level));
+  }
+}
