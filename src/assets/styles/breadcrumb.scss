@@ -1,0 +1,23 @@
+:where(.breadcrumb) {
+  a {
+    text-decoration-color: rgba(#f96b23, 0);
+
+    &:hover,
+    &:focus-visible {
+      text-decoration-color: rgba(#f96b23, 0.33);
+
+      svg {
+        --fill: currentColor;
+      }
+    }
+
+    svg {
+      --fill: transparent;
+    }
+  }
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  float: none;
+  text-decoration: none;
+}

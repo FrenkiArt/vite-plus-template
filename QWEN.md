@@ -124,33 +124,33 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 
 ### Цветовая палитра
 
-| Переменная  | Значение  | Описание                         |
-| ----------- | --------- | -------------------------------- |
-| `$primary`  | `#f96b23` | Основной акцент (оранжевый)      |
-| `$gray-100` | `#f8f9fa` | Светлый фон                      |
-| `$gray-300` | `#dee2e6` | Границы, второстепенный          |
-| `$gray-500` | `#adb5bd` | Middle-серый                     |
-| `$gray-900` | `#212529` | Тёмный текст                     |
-| `$body-bg`  | `#f7f7f7` | Фон страницы                     |
-| `$body-color` | `#212529` | Основной цвет текста           |
+| Переменная    | Значение  | Описание                    |
+| ------------- | --------- | --------------------------- |
+| `$primary`    | `#f96b23` | Основной акцент (оранжевый) |
+| `$gray-100`   | `#f8f9fa` | Светлый фон                 |
+| `$gray-300`   | `#dee2e6` | Границы, второстепенный     |
+| `$gray-500`   | `#adb5bd` | Middle-серый                |
+| `$gray-900`   | `#212529` | Тёмный текст                |
+| `$body-bg`    | `#f7f7f7` | Фон страницы                |
+| `$body-color` | `#212529` | Основной цвет текста        |
 
 ### Типографика
 
-| Элемент           | Шрифт      | Класс                    |
-| ----------------- | ---------- | ------------------------ |
-| Основной текст    | **Inter**  | `font-family-base`       |
-| Моноширинный      | **Fira Code** | (подгружается через webfont-dl) |
+| Элемент        | Шрифт         | Класс                           |
+| -------------- | ------------- | ------------------------------- |
+| Основной текст | **Inter**     | `font-family-base`              |
+| Моноширинный   | **Fira Code** | (подгружается через webfont-dl) |
 
 ### Система заголовков (typograf.scss)
 
-| Элемент | Размер | Weight | `line-height` | `letter-spacing` |
-|---------|:------:|:------:|:-------------:|:----------------:|
-| `h1, .h1` | 4rem (64px) | 300 | 1.05 | `-0.015em` |
-| `h2, .h2` | 3rem (48px) | 500 | 1.1 | `-0.015em` |
-| `h3, .h3` | 2rem (32px) | 600 | 1.2 | `-0.01em` |
-| `h4, .h4` | 1.5rem (24px) | 700 | 1.2 | `normal` |
-| `h5, .h5` | 1.25rem (20px) | 700 | 1.2 | `normal` |
-| `h6, .h6` | 1rem (16px) | 700 | 1.2 | `normal` |
+| Элемент   |     Размер     | Weight | `line-height` | `letter-spacing` |
+| --------- | :------------: | :----: | :-----------: | :--------------: |
+| `h1, .h1` |  4rem (64px)   |  300   |     1.05      |    `-0.015em`    |
+| `h2, .h2` |  3rem (48px)   |  500   |      1.1      |    `-0.015em`    |
+| `h3, .h3` |  2rem (32px)   |  600   |      1.2      |    `-0.01em`     |
+| `h4, .h4` | 1.5rem (24px)  |  700   |      1.2      |     `normal`     |
+| `h5, .h5` | 1.25rem (20px) |  700   |      1.2      |     `normal`     |
+| `h6, .h6` |  1rem (16px)   |  700   |      1.2      |     `normal`     |
 
 **Утилиты `.fs-1…fs-6`** — наследуют такой же `letter-spacing` как соответствующие заголовки.
 
@@ -162,10 +162,16 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 Вертикальный отступ блока, рассчитанный от размера его самого большого заголовка:
 
 ```scss
-.hero-sec  { @include block-pad-y($h1-font-size); }
-.uni-sec   { @include block-pad-y($h2-font-size); }
+.hero-sec {
+  @include block-pad-y($h1-font-size);
+}
+.uni-sec {
+  @include block-pad-y($h2-font-size);
+}
 // Компактный со своими факторами:
-.card-box  { @include block-pad-y($h3-font-size, 0.75, 1); }
+.card-box {
+  @include block-pad-y($h3-font-size, 0.75, 1);
+}
 ```
 
 Формула: `padding = heading-size × factor`. По умолчанию `top: 1.25`, `bottom: 1.5`.
@@ -177,7 +183,11 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 Управление размером и толщиной — через CSS-переменные:
 
 ```html
-<svg class="sprite-icon" style="--width: 1em; --height: 1em; vertical-align: -0.125em;" aria-hidden="true">
+<svg
+  class="sprite-icon"
+  style="--width: 1em; --height: 1em; vertical-align: -0.125em;"
+  aria-hidden="true"
+>
   <use xlink:href="/assets/svg/spritemap.svg#house"></use>
 </svg>
 ```
@@ -221,10 +231,10 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 | `nav.scss`               | Справочник для сложных меню                             |
 | `details.scss`           | Стили нативного аккордеона (`<details>`)                |
 | `typograf.scss`          | Типографика: letter-spacing, font-weight, line-height   |
-| `aspect-ratio.scss`      | Классы соотношения сторон (`.ar-16x9`, `.ar-4x3`)      |
+| `aspect-ratio.scss`      | Классы соотношения сторон (`.ar-16x9`, `.ar-4x3`)       |
 | `stuff.scss`             | Утилиты (`.sprite-icon`, misc)                          |
 | `mixins/`                | SCSS-миксины и функции                                  |
-| `mixins/_block-pad.scss` | `@mixin block-pad-y` — вертикальные отступы блоков     |
+| `mixins/_block-pad.scss` | `@mixin block-pad-y` — вертикальные отступы блоков      |
 | `mixins/_squircle.scss`  | `@function squircle-k`, `@mixin smooth-br` — скругления |
 
 ---
@@ -275,16 +285,16 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 
 ## ⚙️ Команды
 
-| Команда                | Описание                             |
-| ---------------------- | ------------------------------------ |
-| `vp dev`               | Запуск сервера разработки            |
-| `vp build`             | Сборка продакшена                    |
-| `vp fmt`               | Форматирование всех файлов (oxfmt)   |
-| `vp fmt --check`       | Проверка форматирования без записи   |
-| `vp fmt file.scss --write` | Форматировать конкретный файл    |
-| `vp lint`              | Проверка линтером (oxlint)           |
-| `vp check`             | Форматирование + линтинг + типы      |
-| `npm run archive-dist` | Архивирование собранного `dist/`     |
+| Команда                    | Описание                           |
+| -------------------------- | ---------------------------------- |
+| `vp dev`                   | Запуск сервера разработки          |
+| `vp build`                 | Сборка продакшена                  |
+| `vp fmt`                   | Форматирование всех файлов (oxfmt) |
+| `vp fmt --check`           | Проверка форматирования без записи |
+| `vp fmt file.scss --write` | Форматировать конкретный файл      |
+| `vp lint`                  | Проверка линтером (oxlint)         |
+| `vp check`                 | Форматирование + линтинг + типы    |
+| `npm run archive-dist`     | Архивирование собранного `dist/`   |
 
 Конфиг форматирования и линтинга — в `vite.config.ts` (блоки `fmt` и `lint`).
 Редактор (через oxc VSCode) читает конфиг оттуда же, если указан `"oxc.fmt.configPath": "./vite.config.ts"`.
@@ -320,12 +330,17 @@ VitePluginSvgSpritemap("./src/icons/*.svg", {
 ### Использование
 
 ```html
-<svg class="sprite-icon" style="--width: 1em; --height: 1em; vertical-align: -0.125em;" aria-hidden="true">
+<svg
+  class="sprite-icon"
+  style="--width: 1em; --height: 1em; vertical-align: -0.125em;"
+  aria-hidden="true"
+>
   <use xlink:href="/assets/svg/spritemap.svg#house"></use>
 </svg>
 ```
 
 Размер и толщина иконки управляются CSS-переменными:
+
 - `--width` / `--height` — размер (по умолчанию `1.5rem`)
 - `--stroke` — толщина штриха, unitless (по умолчанию `1.5` ≈ 1px при 16px)
 
