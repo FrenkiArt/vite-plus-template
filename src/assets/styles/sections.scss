@@ -1,8 +1,7 @@
-@import "rfs/scss";
+@import "mixins/index";
 
 .uni-sec {
-  padding-top: rfs-fluid-value(64px);
-  padding-bottom: rfs-fluid-value(64px);
+  @include block-pad-y($h2-font-size);
 
   /* &:nth-of-type(odd) {
     background-color: #ffffff;
@@ -10,10 +9,5 @@
 }
 
 .hero-sec {
-  padding-top: rfs-fluid-value(64px);
-  padding-bottom: rfs-fluid-value(64px);
-
-  /* &:nth-of-type(odd) {
-    background-color: #ffffff;
-  } */
+  @include block-pad-y($h1-font-size);
 }

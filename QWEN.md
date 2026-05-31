@@ -124,34 +124,79 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 
 ### Цветовая палитра
 
-| Переменная  | Значение  | Описание                     |
-| ----------- | --------- | ---------------------------- |
-| `$primary`  | `#a300f7` | Основной акцент (фиолетовый) |
-| `$gray-900` | `#000000` | Фон (тёмная тема)            |
-| `$gray-800` | `#101010` | Фон секций                   |
-| `$gray-700` | `#191919` | Фон карточек                 |
-| `$white`    | `#fff`    | Текст                        |
+| Переменная  | Значение  | Описание                         |
+| ----------- | --------- | -------------------------------- |
+| `$primary`  | `#f96b23` | Основной акцент (оранжевый)      |
+| `$gray-100` | `#f8f9fa` | Светлый фон                      |
+| `$gray-300` | `#dee2e6` | Границы, второстепенный          |
+| `$gray-500` | `#adb5bd` | Middle-серый                     |
+| `$gray-900` | `#212529` | Тёмный текст                     |
+| `$body-bg`  | `#f7f7f7` | Фон страницы                     |
+| `$body-color` | `#212529` | Основной цвет текста           |
 
 ### Типографика
 
-| Элемент           | Шрифт         | Класс                       |
-| ----------------- | ------------- | --------------------------- |
-| Заголовки (h1-h6) | **Unbounded** | `.ff-unbounded`             |
-| Основной текст    | **Gilroy**    | `.ff-gilroy` (по умолчанию) |
-| Лёгкий шрифт      | —             | `.fw-light` (300)           |
-| Жирный шрифт      | —             | `.fw-bold` (700)            |
+| Элемент           | Шрифт      | Класс                    |
+| ----------------- | ---------- | ------------------------ |
+| Основной текст    | **Inter**  | `font-family-base`       |
+| Моноширинный      | **Fira Code** | (подгружается через webfont-dl) |
 
-### Градиенты
+### Система заголовков (typograf.scss)
+
+| Элемент | Размер | Weight | `line-height` | `letter-spacing` |
+|---------|:------:|:------:|:-------------:|:----------------:|
+| `h1, .h1` | 4rem (64px) | 300 | 1.05 | `-0.015em` |
+| `h2, .h2` | 3rem (48px) | 500 | 1.1 | `-0.015em` |
+| `h3, .h3` | 2rem (32px) | 600 | 1.2 | `-0.01em` |
+| `h4, .h4` | 1.5rem (24px) | 700 | 1.2 | `normal` |
+| `h5, .h5` | 1.25rem (20px) | 700 | 1.2 | `normal` |
+| `h6, .h6` | 1rem (16px) | 700 | 1.2 | `normal` |
+
+**Утилиты `.fs-1…fs-6`** — наследуют такой же `letter-spacing` как соответствующие заголовки.
+
+**Display-классы (`.display-1…6`)** — динамический `letter-spacing` через `@each`: `calc(-0.0035em * (7 - $level))`.
+
+### Миксины (mixins/)
+
+**`@mixin block-pad-y($heading-size, $top: 1.25, $bottom: 1.5)`**
+Вертикальный отступ блока, рассчитанный от размера его самого большого заголовка:
 
 ```scss
-.bg-grad-hero {
-  background-image: radial-gradient(
-    39% 39% at 53% 48%,
-    rgba(163, 0, 247, 0.17) 0%,
-    rgba(163, 0, 247, 0) 100%
-  );
+.hero-sec  { @include block-pad-y($h1-font-size); }
+.uni-sec   { @include block-pad-y($h2-font-size); }
+// Компактный со своими факторами:
+.card-box  { @include block-pad-y($h3-font-size, 0.75, 1); }
+```
+
+Формула: `padding = heading-size × factor`. По умолчанию `top: 1.25`, `bottom: 1.5`.
+
+### SVG-иконки
+
+Путь: `/assets/svg/spritemap.svg#id`
+
+Управление размером и толщиной — через CSS-переменные:
+
+```html
+<svg class="sprite-icon" style="--width: 1em; --height: 1em; vertical-align: -0.125em;" aria-hidden="true">
+  <use xlink:href="/assets/svg/spritemap.svg#house"></use>
+</svg>
+```
+
+**Класс `.sprite-icon`:**
+
+```scss
+.sprite-icon {
+  display: inline-block;
+  fill: currentColor;
+  height: var(--height, 1.5rem);
+  stroke: currentColor;
+  vertical-align: middle;
+  width: var(--width, 1.5rem);
+  stroke-width: var(--stroke, 1.5); // unitless — масштабируется под размер
 }
 ```
+
+Чтобы совпадало с Inter Regular 400: `stroke-width: 1.5` → при 16px даёт 1px реального штриха.
 
 ---
 
@@ -159,27 +204,28 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 
 **Файлы в `src/assets/styles/`:**
 
-| Файл                    | Назначение                                         |
-| ----------------------- | -------------------------------------------------- |
-| `custom-variables.scss` | Переменные Bootstrap (цвета, шрифты, отступы)      |
-| `custom-bootstrap.scss` | Сборка Bootstrap (только нужные модули)            |
-| `custom-utilities.scss` | Утилиты Bootstrap (opacity, overflow, flex и т.д.) |
-| `style.scss`            | Базовые стили (скроллбары, body, layout)           |
-| `main.scss`             | Точка входа (импортирует все модули)               |
-| `header.scss`           | Стили хедера                                       |
-| `footer.scss`           | Стили футера                                       |
-| `sections.scss`         | Стили секций (about, clients, skills)              |
-| `portfolio.scss`        | Hero-секция (уникальные стили)                     |
-| `links.scss`            | Универсальные стили ссылок (transition, hover)     |
-| `buttons.scss`          | Зарезервирован для кнопок                          |
-| `card.scss`             | Базовые стили карточек                             |
-| `card-template.scss`    | Шаблон для кастомных карточек                      |
-| `nav.scss`              | Справочник для сложных меню                        |
-| `details.scss`          | Зарезервирован для аккордеонов                     |
-| `typograf.scss`         | Зарезервирован для типографики                     |
-| `added-styles.scss`     | Утилитарные классы (`.ff-unbounded`, `.ff-gilroy`) |
-| `aspect-ratio.scss`     | Классы соотношения сторон (`.ar-16x9`, `.ar-4x3`)  |
-| `stuff.scss`            | Утилиты (`.sprite-icon`)                           |
+| Файл / Папка             | Назначение                                              |
+| ------------------------ | ------------------------------------------------------- |
+| `custom-variables.scss`  | Переменные Bootstrap (цвета, шрифты, отступы)           |
+| `custom-bootstrap.scss`  | Сборка Bootstrap (только нужные модули)                 |
+| `custom-utilities.scss`  | Утилиты Bootstrap (opacity, overflow, flex и т.д.)      |
+| `style.scss`             | Базовые стили (body, layout, keyframes)                 |
+| `main.scss`              | Точка входа (импортирует все модули)                    |
+| `header.scss`            | Стили хедера                                            |
+| `footer.scss`            | Стили футера                                            |
+| `sections.scss`          | Стили секций (hero-sec, uni-sec)                        |
+| `links.scss`             | Универсальные стили ссылок (transition, hover)          |
+| `buttons.scss`           | Кастомные стили кнопок                                  |
+| `card.scss`              | Базовые стили карточек                                  |
+| `card-template.scss`     | Шаблон для кастомных карточек                           |
+| `nav.scss`               | Справочник для сложных меню                             |
+| `details.scss`           | Стили нативного аккордеона (`<details>`)                |
+| `typograf.scss`          | Типографика: letter-spacing, font-weight, line-height   |
+| `aspect-ratio.scss`      | Классы соотношения сторон (`.ar-16x9`, `.ar-4x3`)      |
+| `stuff.scss`             | Утилиты (`.sprite-icon`, misc)                          |
+| `mixins/`                | SCSS-миксины и функции                                  |
+| `mixins/_block-pad.scss` | `@mixin block-pad-y` — вертикальные отступы блоков     |
+| `mixins/_squircle.scss`  | `@function squircle-k`, `@mixin smooth-br` — скругления |
 
 ---
 
@@ -199,14 +245,14 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 **Приоритет классов:**
 
 1. **Bootstrap утилиты** — `.fs-3`, `.fw-bold`, `.text-white`, `.bg-opacity-10`
-2. **Утилитарные классы проекта** — `.ff-unbounded`, `.ff-gilroy`, `.bg-grad-hero`
+2. **Утилитарные классы проекта** — `.bg-grad-hero`, кастомные классы
 3. **Кастомные классы** — `.hero-section`, `.card__title`
 
 **Пример:**
 
 ```html
 <!-- ✅ Правильно: Bootstrap + утилиты -->
-<h2 class="section-title text-white mb-4 fs-3 fw-bold ff-unbounded">Заголовок</h2>
+<h2 class="section-title text-white mb-4 fs-3 fw-bold">Заголовок</h2>
 
 <!-- ✅ Правильно: БЭМ для уникальных блоков -->
 <article class="card">
@@ -222,20 +268,26 @@ $resources = $modx->getCollection('modResource', ['parent' => 1]);
 **Правила:**
 
 - `__` (два подчёркивания) — элемент (БЭМ)
-- `.ff-unbounded`, `.ff-gilroy` — шрифты (утилиты)
+- Шрифты — Inter (базовый через `$font-family-base`)
 - `.fs-*`, `.fw-*`, `.text-*` — размеры, вес, цвет (Bootstrap)
 
 ---
 
 ## ⚙️ Команды
 
-| Команда                | Описание                         |
-| ---------------------- | -------------------------------- |
-| `npx vp dev`           | Запуск сервера разработки        |
-| `npx vp build`         | Сборка продакшена                |
-| `npx oxlint .`         | Проверка линтером (oxlint)       |
-| `npx oxfmt .`          | Форматирование (oxfmt)           |
-| `npm run archive-dist` | Архивирование собранного `dist/` |
+| Команда                | Описание                             |
+| ---------------------- | ------------------------------------ |
+| `vp dev`               | Запуск сервера разработки            |
+| `vp build`             | Сборка продакшена                    |
+| `vp fmt`               | Форматирование всех файлов (oxfmt)   |
+| `vp fmt --check`       | Проверка форматирования без записи   |
+| `vp fmt file.scss --write` | Форматировать конкретный файл    |
+| `vp lint`              | Проверка линтером (oxlint)           |
+| `vp check`             | Форматирование + линтинг + типы      |
+| `npm run archive-dist` | Архивирование собранного `dist/`     |
+
+Конфиг форматирования и линтинга — в `vite.config.ts` (блоки `fmt` и `lint`).
+Редактор (через oxc VSCode) читает конфиг оттуда же, если указан `"oxc.fmt.configPath": "./vite.config.ts"`.
 
 ---
 
@@ -268,23 +320,30 @@ VitePluginSvgSpritemap("./src/icons/*.svg", {
 ### Использование
 
 ```html
-<svg class="sprite-icon" width="24" height="24">
-  <use xlink:href="/assets/svg/spritemap.svg#vite"></use>
+<svg class="sprite-icon" style="--width: 1em; --height: 1em; vertical-align: -0.125em;" aria-hidden="true">
+  <use xlink:href="/assets/svg/spritemap.svg#house"></use>
 </svg>
 ```
+
+Размер и толщина иконки управляются CSS-переменными:
+- `--width` / `--height` — размер (по умолчанию `1.5rem`)
+- `--stroke` — толщина штриха, unitless (по умолчанию `1.5` ≈ 1px при 16px)
+
+Для иконок Lucide/SVG с `stroke` в исходнике рекомендуется заменять `stroke-width="2"` на `stroke-width="var(--icon-stroke, 1.5)"` для управления из CSS.
 
 ---
 
 ## ⚠️ Критичные правила (не путать с прошлым опытом!)
 
-1. **Команды через `npx vp`** — dev/build теперь через `vite-plus` (`npx vp dev`, `npx vp build`), а не через `npm run`.
-2. **Линтер — oxlint** — prettier и eslint удалены. Форматирование: `npx oxfmt .`, линтинг: `npx oxlint .`.
-3. **Конфиг — `vite.config.ts`** — старый `vite.config.js` переименован в `vite.config_old.js`.
-4. **Спрайт — новый путь** — иконки теперь доступны по `/assets/svg/spritemap.svg#id`, а не `/svg/spritemap#id`.
-5. **Не ищи `/src/main.js`** — он создаётся автоматически для каждого шаблона!
-6. **Не путай SCSS в `styles/` с CSS** — это source-файлы, их нужно компилировать через Vite.
-7. **Не удаляй файлы из `dist/`** — проект на промежуточном этапе, robots.txt блокирует всё намеренно.
-8. **Nunjucks ≠ Fenom** — в шаблонах используются `{% extends %}`, `{% include %}`, `{{ variable }}`, а не `{$_modx}`.
+1. **Команды через `vp`** — dev/build/lint/fmt через `vite-plus` (`vp dev`, `vp build`), а не через `npm run`.
+2. **Конфиг — `vite.config.ts`** — fmt, lint, dev, build — всё в одном файле. Старый `vite.config_old.js` удалён.
+3. **Спрайт — новый путь** — иконки доступны по `/assets/svg/spritemap.svg#id`. Размер через CSS-переменные `--width`, `--height`.
+4. **Не ищи `/src/main.js`** — он создаётся автоматически для каждого шаблона!
+5. **Не путай SCSS в `styles/` с CSS** — это source-файлы, их нужно компилировать через Vite.
+6. **Не удаляй файлы из `dist/`** — проект на промежуточном этапе, robots.txt блокирует всё намеренно.
+7. **Nunjucks ≠ Fenom** — в шаблонах используются `{% extends %}`, `{% include %}`, `{{ variable }}`, а не `{$_modx}`.
+8. **Типографика** — настраивается в `typograf.scss` (letter-spacing, weights, line-height), а не в `custom-variables.scss`.
+9. **Миксины** — общие миксины в `mixins/`, подключаются через `@import "mixins/index"`.
 
 ---
 
@@ -314,7 +373,7 @@ VitePluginSvgSpritemap("./src/icons/*.svg", {
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-3">
-        <a href="/" class="header__logo text-white text-decoration-none ff-unbounded fw-bold fs-4">
+        <a href="/" class="header__logo text-white text-decoration-none fw-bold fs-4">
           {{ site.site_name }}
         </a>
       </div>
@@ -322,7 +381,7 @@ VitePluginSvgSpritemap("./src/icons/*.svg", {
         <nav class="header__nav">
           <ul class="list-unstyled d-flex justify-content-center gap-4 mb-0">
             {% for item in site.menu2 %}
-              <li><a href="{{ item.url }}" class="text-white text-decoration-none ff-gilroy">{{ item.title }}</a></li>
+              <li><a href="{{ item.url }}" class="text-white text-decoration-none">{{ item.title }}</a></li>
             {% endfor %}
           </ul>
         </nav>
@@ -345,7 +404,7 @@ VitePluginSvgSpritemap("./src/icons/*.svg", {
 {% block content %}
 <section class="py-5">
   <div class="container">
-    <h1 class="ff-unbounded">Заголовок</h1>
+    <h1>Заголовок</h1>
   </div>
 </section>
 {% endblock %}

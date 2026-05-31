@@ -1,0 +1,6 @@
+@import "rfs/scss";
+
+@mixin block-pad-y($heading-size, $top: 1.25, $bottom: 1.5) {
+  @include rfs($heading-size * $top, padding-top);
+  @include rfs($heading-size * $bottom, padding-bottom);
+}
