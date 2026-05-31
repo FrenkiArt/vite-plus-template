@@ -61,8 +61,8 @@ vite-template/
 │ │ │ ├── custom-variables.scss
 │ │ │ └── ...
 │ │ └── js/
-│ │   ├── main.js
-│ │   └── my.js
+│ │ ├── main.js
+│ │ └── my.js
 │ ├── components/
 │ │ ├── header.njk
 │ │ ├── footer.njk
@@ -76,8 +76,8 @@ vite-template/
 │ ├── layouts/
 │ │ └── base.njk
 │ └── pages/
-│   ├── index.njk
-│   └── contacts.njk
+│ ├── index.njk
+│ └── contacts.njk
 ├── oxfmt.config.json
 ├── oxlint.config.json
 ├── package.json
