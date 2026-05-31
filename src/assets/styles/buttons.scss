@@ -42,3 +42,10 @@ button {
   }
 }
  */
+
+
+@supports not (text-box: trim-both) {
+  button, .btn {
+    --bs-btn-padding-y: 0.69rem;
+  }
+}
