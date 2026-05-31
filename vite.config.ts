@@ -1,7 +1,7 @@
-import {defineConfig} from "vite";
+import { defineConfig } from "vite";
 import vituum from "vituum";
 import nunjucks from "@vituum/vite-plugin-nunjucks";
-import {visualizer} from "rollup-plugin-visualizer";
+import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression";
 import webfontDownload from "vite-plugin-webfont-dl";
 import VitePluginSvgSpritemap from "@spiriit/vite-plugin-svg-spritemap";
@@ -9,7 +9,31 @@ import VitePluginSvgSpritemap from "@spiriit/vite-plugin-svg-spritemap";
 const IMAGE_EXTS = ["png", "jpg", "jpeg", "gif", "avif", "webp"];
 const FONT_EXTS = ["eot", "ttf", "otf", "woff2", "woff"];
 
-export default defineConfig(({mode}) => ({
+export default defineConfig(({ mode }) => ({
+  fmt: {
+    ignorePatterns: ["dist/**"],
+    lineWidth: 100,
+    indentWidth: 2,
+    indentStyle: "space",
+    quoteStyle: "single",
+    overrides: [
+      {
+        files: ["**/*.scss", "**/*.css"],
+        options: {
+          lineWidth: 60,
+        },
+      },
+    ],
+  },
+
+  lint: {
+    ignorePatterns: ["dist/**"],
+    rules: {
+      "no-unused-vars": "error",
+      "no-undef": "error",
+    },
+  },
+
   plugins: [
     mode === "production" ? webfontDownload() : null,
 
@@ -42,12 +66,12 @@ export default defineConfig(({mode}) => ({
       prefix: "",
       styles: false,
       route: {
-        url: '/assets/svg/spritemap.svg',
-        name: 'Sprite icons',
+        url: "/assets/svg/spritemap.svg",
+        name: "Sprite icons",
       },
       output: {
-        filename: '/svg/spritemap.svg',
-        name: 'spritemap',
+        filename: "/svg/spritemap.svg",
+        name: "spritemap",
         view: true,
         use: true,
       },
@@ -66,12 +90,7 @@ export default defineConfig(({mode}) => ({
     preprocessorOptions: {
       scss: {
         api: "modern-compiler",
-        silenceDeprecations: [
-          "color-functions",
-          "global-builtin",
-          "import",
-          "if-function",
-        ],
+        silenceDeprecations: ["color-functions", "global-builtin", "import", "if-function"],
       },
     },
   },
