@@ -1,11 +1,13 @@
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,
-.fs-1, .fs-2, .fs-3, .fs-4, .fs-5, .fs-6,
-.display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
-p, .lead, blockquote, .blockquote, figcaption, .figure-caption,
-li, dt, dd, th, td, pre, code, address, small, label, legend,
-button, .btn {
-  text-box: trim-both ex alphabetic;
-  background-color: pink;
+@supports (text-box: trim-both) {
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,
+  .fs-1, .fs-2, .fs-3, .fs-4, .fs-5, .fs-6,
+  .display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
+  p, .lead, blockquote, .blockquote, figcaption, .figure-caption,
+  li, dt, dd, th, td, pre, code, address, small, label, legend,
+  button, .btn {
+    text-box: trim-both ex alphabetic;
+    background-color: pink;
+  }
 }
 
 h1,
