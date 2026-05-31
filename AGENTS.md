@@ -21,13 +21,20 @@
 
 ## text-box (экспериментально)
 
-Все текстовые элементы (`h1–h6, .h1–.h6, .fs-1–6, .display-1–6, p, .lead, blockquote, .blockquote, figcaption, .figure-caption, li, dt, dd, th, td, pre, code, address, small, label, legend, button, .btn`) получают:
+Все текстовые элементы получают `text-box` только в браузерах с поддержкой (обёрнуто в `@supports`):
 
 ```scss
-text-box: trim-both ex alphabetic;
+@supports (text-box: trim-both) {
+  h1–h6, .h1–.h6, .fs-1–6, .display-1–6,
+  p, .lead, blockquote, .blockquote, figcaption, .figure-caption,
+  li, dt, dd, th, td, pre, code, address, small, label, legend,
+  button, .btn {
+    text-box: trim-both ex alphabetic;
+  }
+}
 ```
 
-Поддержка: Chrome 133+ (отлично), Safari 18.2+ (отлично, включая `ex`), Edge 133+ (отлично), Firefox — пока нет (progressive enhancement).
+Поддержка: Chrome 133+ (отлично), Safari 18.2+ (отлично, включая `ex`), Edge 133+ (отлично), Firefox — пока нет, но при появлении включится автоматом.
 
 ## Кнопки и инпуты
 
