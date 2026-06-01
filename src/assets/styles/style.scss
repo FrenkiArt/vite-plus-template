@@ -49,8 +49,6 @@ body {
   font-variation-settings: "wdth" 100;
   text-wrap: balance;
 
-
-
   [id] {
     scroll-margin-block-start: var(--header-height, 0);
   }
@@ -80,8 +78,7 @@ body {
 }
 
 .sec-title {
-  @include rfs(52px, font-size);
-  @include rfs(40px, margin-bottom);
+  @include rfs(1rem, margin-bottom);
 }
 
 .sec-subtitle {

@@ -1,14 +1,110 @@
 @import "rfs/scss";
 
 @supports (text-box: trim-both) {
-  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,
-  .fs-1, .fs-2, .fs-3, .fs-4, .fs-5, .fs-6,
-  .display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
-  p, .lead, blockquote, .blockquote, figcaption, .figure-caption,
-  li, dt, dd, th, td, pre, code, address, small, label, legend,
-  button, .btn {
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6,
+  .fs-1,
+  .fs-2,
+  .fs-3,
+  .fs-4,
+  .fs-5,
+  .fs-6,
+  .display-1,
+  .display-2,
+  .display-3,
+  .display-4,
+  .display-5,
+  .display-6,
+  p,
+  .lead,
+  blockquote,
+  .blockquote,
+  figcaption,
+  .figure-caption,
+  li,
+  dt,
+  dd,
+  th,
+  td,
+  pre,
+  code,
+  address,
+  small,
+  label,
+  legend,
+  button,
+  .btn {
     text-box: trim-both ex alphabetic;
-    background-color: pink;
+  }
+}
+
+@supports not (text-box: trim-both) {
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6,
+  .fs-1,
+  .fs-2,
+  .fs-3,
+  .fs-4,
+  .fs-5,
+  .fs-6,
+  .display-1,
+  .display-2,
+  .display-3,
+  .display-4,
+  .display-5,
+  .display-6,
+  p,
+  .lead,
+  blockquote,
+  .blockquote,
+  figcaption,
+  .figure-caption,
+  li:not(.breadcrumb-item),
+  dt,
+  dd,
+  th,
+  td,
+  pre,
+  code,
+  address,
+  small,
+  label,
+  legend {
+    &::before {
+      content: "";
+      display: table;
+      margin-bottom: -0.15em;
+    }
+    &::after {
+      content: "";
+      display: table;
+      margin-top: -0.08em;
+    }
+  }
+
+  button,
+  .btn {
+    --bs-btn-padding-y: 0.69rem;
   }
 }
 
@@ -18,7 +114,6 @@ h1,
   line-height: 1.143;
   letter-spacing: -0.045em;
   @include rfs(1.5rem, margin-bottom);
-
 }
 
 h2,
@@ -27,7 +122,6 @@ h2,
   line-height: 1.2;
   letter-spacing: -0.035em;
   @include rfs(1.5rem, margin-bottom);
-
 }
 
 h3,
@@ -36,7 +130,6 @@ h3,
   line-height: 1.25;
   letter-spacing: -0.01em;
   @include rfs(1.5rem, margin-bottom);
-
 }
 
 h4,
@@ -45,7 +138,6 @@ h4,
   line-height: 1.333;
   letter-spacing: normal;
   @include rfs(1.5rem, margin-bottom);
-
 }
 
 h5,
@@ -54,7 +146,6 @@ h5,
   line-height: 1.2;
   letter-spacing: normal;
   @include rfs(1.5rem, margin-bottom);
-
 }
 
 h6,
@@ -63,14 +154,11 @@ h6,
   line-height: 1.5;
   letter-spacing: normal;
   @include rfs(1.5rem, margin-bottom);
-
 }
 
 .lead {
   line-height: 1.2;
   @include rfs(1.5rem, margin-bottom);
-}
-
 }
 
 .blockquote-footer {
