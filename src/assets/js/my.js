@@ -27,6 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // initLightGalleries();
   initTemplateSlider();
   initTemplateSlider2();
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => initTightLists(".prose"));
+  } else {
+    window.addEventListener("load", initTightLists);
+  }
 });
 
 // Функция инициализации масок телефонных номеров
@@ -96,3 +102,27 @@ function initTemplateSlider2() {
 
 // Экспорт модального окна для доступа извне
 window.modal = Modal;
+
+// Авто-определение однострочных списков
+function initTightLists(container) {
+  const root = container ? document.querySelector(container) : document;
+  if (!root) return;
+  const lists = root.querySelectorAll("ul, ol");
+
+  for (const list of lists) {
+    const items = list.querySelectorAll(":scope > li");
+    let allSingleLine = true;
+
+    for (const li of items) {
+      const lh = parseFloat(getComputedStyle(li).lineHeight);
+      if (li.scrollHeight > lh + 1) {
+        allSingleLine = false;
+        break;
+      }
+    }
+
+    if (allSingleLine && items.length > 0) {
+      list.classList.add("tight");
+    }
+  }
+}

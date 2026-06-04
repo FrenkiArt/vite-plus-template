@@ -14,6 +14,8 @@
 
   // .nav__item
   &__item {
+    // margin-block-start: 0!important;
+
     &:hover,
     &:focus-visible,
     &:focus-within {
@@ -26,6 +28,7 @@
 
     &::marker {
       color: transparent;
+          content: "";
     }
   }
 
