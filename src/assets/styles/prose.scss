@@ -1,0 +1,220 @@
+// =============================================
+//  PROSE — редакционная типографика для статей
+// =============================================
+
+.prose {
+  // Сбрасываем Bootstrap-отступы
+  & :where(p, .lead, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, figure, img) {
+    margin-bottom: 0;
+  }
+
+  // Базовый вертикальный ритм
+  > * + * {
+    margin-block-start: 1lh;
+  }
+
+  // ============================
+  //  Авто-определение первого изображения
+  // ============================
+
+  > img:first-of-type + h1,
+  > figure:first-of-type + h1 {
+    margin-top: 0.5lh;
+    @supports not (text-box: trim-both) {
+      margin-top: 0.25lh;
+    }
+  }
+  > img:first-of-type + h2,
+  > figure:first-of-type + h2 {
+    margin-top: 0.5lh;
+    @supports not (text-box: trim-both) {
+      margin-top: 0.33lh;
+    }
+  }
+  > img:first-of-type + h3,
+  > figure:first-of-type + h3 {
+    margin-top: 0.6lh;
+    @supports not (text-box: trim-both) {
+      margin-top: 0.4lh;
+    }
+  }
+  > img:first-of-type + h4,
+  > figure:first-of-type + h4 {
+    margin-top: 0.5lh;
+    @supports not (text-box: trim-both) {
+      margin-top: 0.25lh;
+    }
+  }
+  > img:first-of-type + h5,
+  > figure:first-of-type + h5 {
+    margin-top: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-top: 0.33lh;
+    }
+  }
+  > img:first-of-type + h6,
+  > figure:first-of-type + h6 {
+    margin-top: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-top: 0.33lh;
+    }
+  }
+  > img:first-of-type + .lead,
+  > figure:first-of-type + .lead {
+    margin-top: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-top: 0.33lh;
+    }
+  }
+
+  // ============================
+  //  ATTACH-ЛОГИКА
+  // ============================
+
+  // Картинка открывает новый блок
+  .attach-next {
+    margin-bottom: 0;
+  }
+
+  .attach-next + h1 {
+    margin-block-start: 0.5lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.25lh;
+    }
+  }
+  .attach-next + h2 {
+    margin-block-start: 0.5lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+  .attach-next + h3 {
+    margin-block-start: 0.6lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.4lh;
+    }
+  }
+  .attach-next + h4 {
+    margin-block-start: 0.5lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.25lh;
+    }
+  }
+  .attach-next + h5 {
+    margin-block-start: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+  .attach-next + h6 {
+    margin-block-start: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+  .attach-next + p,
+  .attach-next + .lead,
+  .attach-next + ul,
+  .attach-next + ol,
+  .attach-next + blockquote {
+    margin-block-start: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+
+  // ============================
+  //  LEAD ПОСЛЕ ЗАГОЛОВКА
+  // ============================
+
+  h1 + .lead,
+  h2 + .lead {
+    margin-block-start: 1lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+  h3 + .lead,
+  h4 + .lead,
+  h5 + .lead,
+  h6 + .lead {
+    margin-block-start: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+
+  // ============================
+  //  Картинка завершает блок
+  // ============================
+
+  h1 + .attach-prev,
+  h2 + .attach-prev {
+    margin-block-start: 1lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.67lh;
+    }
+  }
+  h3 + .attach-prev,
+  h4 + .attach-prev {
+    margin-block-start: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+  h5 + .attach-prev,
+  h6 + .attach-prev {
+    margin-block-start: 0.33lh;
+  }
+  .lead + .attach-prev,
+  p + .attach-prev,
+  ul + .attach-prev,
+  ol + .attach-prev,
+  blockquote + .attach-prev {
+    margin-block-start: 0.67lh;
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+
+  // ============================
+  //  Обычные изображения
+  // ============================
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-block: 1lh;
+  }
+
+  // ============================
+  //  Figure
+  // ============================
+  figure {
+    margin: 0;
+
+    img {
+      margin: 0;
+    }
+
+    figcaption {
+      margin-top: 0.5rem;
+    }
+  }
+
+  // ============================
+  //  Списки
+  // ============================
+  ul,
+  ol {
+    padding-left: 1.5em;
+  }
+
+  li + li {
+    margin-block-start: 1lh;
+
+    @supports not (text-box: trim-both) {
+      margin-block-start: 0.33lh;
+    }
+  }
+}

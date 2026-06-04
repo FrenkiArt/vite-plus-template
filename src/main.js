@@ -1,5 +1,5 @@
 // import Swiper styles
-import "swiper/css/bundle";
+//import "swiper/css/bundle";
 //import 'swiper/css';
 //import 'swiper/css/autoplay';
 //import 'swiper/css/controller';
@@ -14,7 +14,7 @@ import "swiper/css/bundle";
 //import 'swiper/css/scrollbar';
 //import 'swiper/css/thumbs';
 
-import "lightgallery/css/lightgallery.css";
+//import "lightgallery/css/lightgallery.css";
 //import 'lightgallery/css/lg-fullscreen.css';
 //import 'lightgallery/css/lg-video.css';
 
