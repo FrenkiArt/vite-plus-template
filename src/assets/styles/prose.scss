@@ -10,7 +10,7 @@
 
   // Базовый вертикальный ритм
   > * + * {
-    margin-block-start: 1lh;
+    margin-block-start: var(--prose-flow, 1lh);
   }
 
   // ============================

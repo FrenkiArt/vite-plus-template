@@ -80,3 +80,7 @@
   padding: 1em;
   background-color: lightblue;
 }
+
+.spacer-view {
+  height: var(--view, 100vh);
+}
