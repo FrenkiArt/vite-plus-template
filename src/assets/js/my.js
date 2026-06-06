@@ -8,6 +8,7 @@ import { Modal } from "bootstrap/js/dist/modal";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import initSmartSticky from "./sticky-smart.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //initTemplateSlider();
   //initTemplateSlider2();
   initScrollAnimations();
-  initSmartSticky();
+  initSmartSticky(lenis);
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => initTightLists(".prose"));
@@ -107,36 +108,6 @@ function initTemplateSlider2() {
 
 // Экспорт модального окна для доступа извне
 window.modal = Modal;
-
-// Умная липкая шапка
-function initSmartSticky() {
-  const header = document.querySelector("[data-sticky-smart]");
-  if (!header) return;
-
-  function updateHeight() {
-    document.documentElement.style.setProperty(
-      "--header-height",
-      `${header.offsetHeight}px`
-    );
-  }
-
-  updateHeight();
-  window.addEventListener("resize", updateHeight);
-
-  lenis.on("scroll", (e) => {
-    if (e.userData?.isAnchor) return;
-
-    if (e.animatedScroll > header.offsetHeight) {
-      const dir = Math.sign(e.velocity);
-      if (dir > 0) header.classList.add("sticky-hidden");
-      else if (dir < 0) header.classList.remove("sticky-hidden");
-    } else {
-      header.classList.remove("sticky-hidden");
-    }
-
-    header.classList.toggle("sticky-shadow", e.animatedScroll > 0 && !header.classList.contains("sticky-hidden"));
-  });
-}
 
 // Авто-определение однострочных списков
 function initTightLists(container) {
