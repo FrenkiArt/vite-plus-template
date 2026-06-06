@@ -1,11 +1,13 @@
-<header id="header" class="header">
+<header id="header" class="header text-bg-primary" style="--bs-bg-opacity: .33;" data-sticky-smart>
   <div class="container">{{ site.site_name | default('Мой сайт') }}</div>
 
   <nav>
     <ul>
       {% for item in site.menu2 %}
         <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-      {% endfor %}
+        {% endfor %}
+
+        <li><a href="#typografy-block">typografy-block</a></li>
     </ul>
   </nav>
 
@@ -16,13 +18,13 @@
   <div class="div">
     {# ID иконки теперь формируется как "sprite-имя_файла_без_расширения" #}
     <svg class="sprite-icon">
-      <use xlink:href="/__spritemap#sprite-vite"></use>
+      <use xlink:href="assets/svg//spritemap#sprite-vite"></use>
     </svg>
     <svg class="sprite-icon text-primary">
-      <use xlink:href="/__spritemap#sprite-burger"></use>
+      <use xlink:href="assets/svg//spritemap#sprite-burger"></use>
     </svg>
     <svg class="sprite-icon">
-      <use xlink:href="/__spritemap#sprite-javascript"></use>
+      <use xlink:href="assets/svg//spritemap#sprite-javascript"></use>
     </svg>
   </div>
 </header>
