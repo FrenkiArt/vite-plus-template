@@ -192,14 +192,14 @@ function initScrollAnimations() {
       });
 
       tl.to(p, {
-        v: 0, opacity: 1, duration: 0.11,
+        v: 0, opacity: 1, duration: 0.11, ease: "cubic-bezier(0,0,0.5,1)",
         onUpdate: () => {
           el.style.filter = `blur(${p.v}px)`;
           el.style.opacity = p.opacity;
         },
       })
       .to(p, {
-        v: 8, opacity: 0, duration: 0.1,
+        v: 8, opacity: 0, duration: 0.1, ease: "cubic-bezier(0,0,0.5,1)",
         onUpdate: () => {
           el.style.filter = `blur(${p.v}px)`;
           el.style.opacity = p.opacity;
@@ -219,13 +219,13 @@ function initScrollAnimations() {
       });
 
       tl.to(p, {
-        top: 0, duration: 0.11,
+        top: 0, duration: 0.11, ease: "cubic-bezier(0,0,0.5,1)",
         onUpdate: () => {
           el.style.clipPath = `inset(${p.top}% 0 ${p.bottom}% 0)`;
         },
       })
       .to(p, {
-        bottom: 100, duration: 0.1,
+        bottom: 100, duration: 0.1, ease: "cubic-bezier(0,0,0.5,1)",
         onUpdate: () => {
           el.style.clipPath = `inset(${p.top}% 0 ${p.bottom}% 0)`;
         },
@@ -258,7 +258,7 @@ function initScrollAnimations() {
     //   └─►states[1]◄────────────────────►states[2]
     //   states[0] (предустановлен gsap.set)
 
-    tl.to(el, { ...states[1], duration: 0.11 })
-      .to(el, { ...states[2], duration: 0.1 }, 0.89);
+    tl.to(el, { ...states[1], duration: 0.11, ease: "cubic-bezier(0,0,0.5,1)" })
+      .to(el, { ...states[2], duration: 0.1, ease: "cubic-bezier(0,0,0.5,1)" }, 0.89);
   });
 }
