@@ -5,9 +5,15 @@
   right: 0;
   z-index: 1030;
   will-change: transform;
-  transition: transform 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.25s ease;
 
   &.sticky-hidden {
     transform: translateY(-100%);
+  }
+
+  &.sticky-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   }
 }

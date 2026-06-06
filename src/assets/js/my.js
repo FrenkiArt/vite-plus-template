@@ -127,10 +127,14 @@ function initSmartSticky() {
     if (e.userData?.isAnchor) return;
 
     if (e.animatedScroll > header.offsetHeight) {
-      header.classList.toggle("sticky-hidden", e.velocity > 0);
+      const dir = Math.sign(e.velocity);
+      if (dir > 0) header.classList.add("sticky-hidden");
+      else if (dir < 0) header.classList.remove("sticky-hidden");
     } else {
       header.classList.remove("sticky-hidden");
     }
+
+    header.classList.toggle("sticky-shadow", e.animatedScroll > 0 && !header.classList.contains("sticky-hidden"));
   });
 }
 
