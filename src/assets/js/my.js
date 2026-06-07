@@ -31,7 +31,7 @@ document.addEventListener("show.bs.offcanvas", () => lenis.stop());
 document.addEventListener("hidden.bs.offcanvas", () => lenis.start());
 
 // Закрытие offcanvas при клике по анкорной ссылке (#...),
-// затем скролл к цели через Lenis (anchors: true)
+// затем скролл к цели через Lenis
 document.addEventListener("click", (e) => {
   const link = e.target.closest('.offcanvas a[href^="#"]');
   if (!link) return;
@@ -40,7 +40,9 @@ document.addEventListener("click", (e) => {
   const offcanvas = Offcanvas.getInstance(offcanvasEl);
   const href = link.getAttribute("href");
 
+  lenis.start();  // запускаем RAF до закрытия, чтобы Lenis был стабилен
   offcanvas.hide();
+
   offcanvasEl.addEventListener("hidden.bs.offcanvas", () => {
     lenis.scrollTo(href, { userData: { isAnchor: true } });
   }, { once: true });
