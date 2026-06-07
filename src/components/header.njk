@@ -19,13 +19,11 @@
           <ul class="navbar-nav flex-grow-1 list-unstyled">
             {% for item in menu2 %}
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  {% if item.url == pageUrl %}aria-current="page"{% endif %}
-                  href="{{ item.url }}"
-                  data-bs-dismiss="offcanvas">
-                    {{ item.title }}
-                </a>
+                {% if item.url == pageUrl %}
+                  <span class="nav-link active" aria-current="page">{{ item.title }}</span>
+                {% else %}
+                  <a class="nav-link" href="{{ item.url }}" data-bs-dismiss="offcanvas">{{ item.title }}</a>
+                {% endif %}
               </li>
             {% endfor %}
           </ul>
