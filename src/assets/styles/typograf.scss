@@ -231,6 +231,12 @@ ul li::marker {
   content: "— ";
 }
 
+.list-unstyled {
+  li::marker{
+    content:'';
+  }
+}
+
 ul.tight,
 ol.tight {
   li + li {
@@ -241,4 +247,3 @@ ol.tight {
     }
   }
 }
-
