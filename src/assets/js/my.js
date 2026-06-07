@@ -17,8 +17,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Инициализация Lenis (плавный скролл)
 const lenis = new Lenis({
-  wrapper: document.querySelector("#lenis-wrapper"),
-  content: document.querySelector("#lenis-wrapper"),
   autoRaf: true,
   anchors: {
     userData: { isAnchor: true },
@@ -28,21 +26,9 @@ const lenis = new Lenis({
 // Синхронизация Lenis + ScrollTrigger
 lenis.on("scroll", ScrollTrigger.update);
 
-// ScrollTrigger — используем #lenis-wrapper как скроллер
-ScrollTrigger.scrollerProxy("#lenis-wrapper", {
-  scrollTop(value) {
-    if (arguments.length) {
-      lenis.scrollTo(value);
-    }
-    return lenis.actualScroll;
-  },
-  getBoundingClientRect() {
-    return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-  },
-  pinType: document.querySelector("#lenis-wrapper").style.transform ? "transform" : "fixed"
-});
-
-ScrollTrigger.defaults({ scroller: "#lenis-wrapper" });
+// Стоп Lenis при открытии offcanvas, старт при закрытии
+document.addEventListener("show.bs.offcanvas", () => lenis.stop());
+document.addEventListener("hidden.bs.offcanvas", () => lenis.start());
 
 // Инициализация при загрузке DOM-дерева
 document.addEventListener("DOMContentLoaded", () => {

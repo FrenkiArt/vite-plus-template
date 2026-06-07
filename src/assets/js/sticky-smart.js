@@ -15,7 +15,7 @@ export default function initSmartSticky(lenis) {
   lenis.on("scroll", (e) => {
     if (e.userData?.isAnchor) return;
 
-    if (e.animatedScroll > 0) {
+    if (e.animatedScroll > header.offsetHeight) {
       const dir = Math.sign(e.velocity);
       if (dir > 0) header.classList.add("sticky-hidden");
       else if (dir < 0) header.classList.remove("sticky-hidden");

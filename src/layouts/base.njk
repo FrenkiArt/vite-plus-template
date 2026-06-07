@@ -90,12 +90,10 @@
     {% include "components/header.njk" %}
     {% include "components/sec-nav.njk" %}
 
-    <div id="lenis-wrapper">
-      {# Основной контент страницы — будет подставляться из дочерних шаблонов #}
-      <main id="app" class="page">{% block content %}{% endblock %}</main>
+    {# Основной контент страницы — будет подставляться из дочерних шаблонов #}
+    <main id="app" class="page">{% block content %}{% endblock %}</main>
 
-      {% include "components/footer.njk" %}
-    </div>
+    {% include "components/footer.njk" %}
 
     {# Общая иконка и скрипт (можно оставить здесь) #}
     <svg class="sprite-icon text-primary">

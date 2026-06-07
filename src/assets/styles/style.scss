@@ -43,10 +43,7 @@
 
 body {
   min-width: 320px;
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-  overflow: hidden;
+  min-height: 100dvh;
   //padding-top: var(--header-height, 0);
 
   font-optical-sizing: auto;
@@ -56,12 +53,6 @@ body {
   [id] {
     scroll-margin-block-start: var(--header-height, 0);
   }
-}
-
-#lenis-wrapper {
-  flex-grow: 1;
-  overflow: auto;
-  min-height: 0;
 }
 
 @media (min-width: 400px) {
