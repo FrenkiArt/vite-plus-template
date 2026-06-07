@@ -1,7 +1,7 @@
 // import IMask from 'imask';
 //import lightGallery from 'lightgallery';
 //import lgFullscreen from 'lightgallery/plugins/fullscreen';
-import { Modal } from "bootstrap/js/dist/modal";
+import "bootstrap/js/dist/modal";
 import "bootstrap/js/dist/offcanvas";
 
 //import Swiper from "swiper";
@@ -107,8 +107,7 @@ function initTemplateSlider2() {
   });
 }
 
-// Экспорт модального окна для доступа извне
-window.modal = Modal;
+
 
 // Авто-определение однострочных списков
 function initTightLists(container) {
