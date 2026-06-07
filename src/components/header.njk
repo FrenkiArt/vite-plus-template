@@ -17,15 +17,15 @@
         </div>
         <div class="offcanvas-body d-flex flex-column flex-lg-row gap-3">
           <ul class="navbar-nav flex-grow-1 list-unstyled">
-            {% for item in menu2 %}
+            {% for item in menu2 %}{% if not item.hidden %}
               <li class="nav-item">
                 {% if item.url == pageUrl %}
-                  <span class="nav-link active" aria-current="page">{{ item.title }}</span>
+                  <span class="nav-link active{{ ' ' + item.class if item.class }}" aria-current="page">{{ item.title }}</span>
                 {% else %}
-                  <a class="nav-link" href="{{ item.url }}" data-bs-dismiss="offcanvas">{{ item.title }}</a>
+                  <a class="nav-link{{ ' ' + item.class if item.class }}" href="{{ item.url }}" data-bs-dismiss="offcanvas">{{ item.title }}</a>
                 {% endif %}
               </li>
-            {% endfor %}
+            {% endif %}{% endfor %}
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

@@ -13,7 +13,8 @@
     { "title": "Каталог", "url": "/catalog/" },
     { "title": "Новости", "url": "/news/" },
     { "title": "Контакты", "url": "/contacts/" },
-    { "title": "Блок типографии", "url": "/#typografy-block" }
+    { "title": "Раздел dev", "url": "/dev/", "hidden": true },
+    { "title": "Блок типографии", "url": "/#typografy-block", "class": "d-lg-none" }
   ],
   "config": {
     "base_url": "/"
