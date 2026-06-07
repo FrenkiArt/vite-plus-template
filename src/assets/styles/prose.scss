@@ -202,8 +202,6 @@
     }
   }
 
-
-
   li + li:not(.breadcrumb-item):not(.list-group-item):not(.nav__item):not([class]) {
     margin-block-start: 1lh;
 
@@ -211,5 +209,4 @@
       margin-block-start: 0.33lh;
     }
   }
-
 }

@@ -42,3 +42,23 @@ button {
   }
 }
  */
+
+
+.copied {
+  position: relative;
+
+  &::after {
+    content: '✓ Скопировано!';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4caf50;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+}

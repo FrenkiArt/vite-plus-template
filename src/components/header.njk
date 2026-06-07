@@ -1,34 +1,42 @@
 <header id="header" class="header" data-sticky-smart>
   <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand" href="{{ logo.link | default('') }}">
-        <img src="{{ logo.url | default('') }}" alt="{{ logo.title | default('') }}" width="auto" height="auto" class="d-inline-block align-text-top">
+      <a class="navbar-brand d-lg-none" href="{{ logo.link | default('') }}">
+        <img src="{{ logo.url | default('') }}" alt="{{ logo.title | default('') }}" width="auto" height="auto" class="d-inline-block">
         {{ logo.title | default('') }}
       </a>
 
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Навигация</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center gap-3">
-          <ul class="navbar-nav flex-grow-1 list-unstyled">
-            {% for item in menu2 %}{% if not item.hidden %}
+        <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center  gap-3">
+          <a class="navbar-brand d-none d-lg-inline-block" href="{{ logo.link | default('') }}">
+            <img src="{{ logo.url | default('') }}" alt="{{ logo.title | default('') }}" width="auto" height="auto" class="d-inline-block">
+            {{ logo.title | default('') }}
+          </a>
+
+          <div class="wrap-slider-nav flex-grow-1 mn-edge mx-lg-0  px-2 px-lg-0 py-lg-1 " >
+            <ul class="navbar-nav list-unstyled overflow-auto invisible-scrollbar-friendly" data-xscroll>
+              {% for item in menu2 %}{% if not item.hidden %}
               <li class="nav-item">
                 {% if item.url == pageUrl %}
-                  <span class="nav-link active{{ ' ' + item.class if item.class }}" aria-current="page">{{ item.title }}</span>
+                <span class="nav-link active{{ ' ' + item.class if item.class }}" aria-current="page">{{ item.title }}</span>
                 {% else %}
-                  <a class="nav-link{{ ' ' + item.class if item.class }}" href="{{ item.url }}" {% if item.dismiss %}data-bs-dismiss="offcanvas"{% endif %}>{{ item.title }}</a>
+                <a class="nav-link{{ ' ' + item.class if item.class }}" href="{{ item.url }}" {% if item.dismiss %}data-bs-dismiss="offcanvas"{% endif %}>{{ item.title }}</a>
                 {% endif %}
               </li>
-            {% endif %}{% endfor %}
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+              {% endif %}{% endfor %}
+            </ul>
+          </div>
+
+          <form class="d-flex" role="search" style="min-width: 200px;">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
             <button class="btn btn-outline-success d-none" type="submit">Искать</button>
           </form>
 
-          <a href="tel:{{ contacts.phone_link }}" class="d-inline-block">
+          <a href="tel:{{ contacts.phone_link }}" class="d-inline-block text-nowrap">
             {{ contacts.phone_display }}
           </a>
 
@@ -45,6 +53,10 @@
           </div>
         </div>
       </div>
+
+      <a href="tel:{{ contacts.phone_link }}" class="d-inline-block d-lg-none text-nowrap ms-auto me-4">
+        {{ contacts.phone_display }}
+      </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

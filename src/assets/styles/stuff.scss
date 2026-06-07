@@ -237,3 +237,11 @@ input[type="range"]::-ms-track {
   width: var(--width, 1.5rem);
   stroke-width: var(--stroke, 1.5);
 }
+
+.offcanvas-start {
+  max-width: 89%;
+
+  @media (min-width: 992px) {
+    max-width: 100%;
+  }
+}

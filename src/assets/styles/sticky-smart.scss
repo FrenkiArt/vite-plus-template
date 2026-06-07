@@ -1,5 +1,5 @@
 [data-sticky-smart] {
-  background-color: var(--bs-body-bg, #ffffff);
+  background-color: #fffcfa;
   position: sticky;
   top: 0;
   left: 0;
@@ -16,6 +16,6 @@
 
   &.sticky-shadow {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-     background-color: #ffffff;
+    background-color: var(--bs-body-bg, #ffffff);
   }
 }

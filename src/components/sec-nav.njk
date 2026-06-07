@@ -5,7 +5,7 @@
 <div class="sec-nav bg-primary d-none d-lg-block" style="--bs-bg-opacity: .05;">
   <div class="container">
     <nav class="nav">
-      <ul class="nav__list">
+      <ul class="nav__list w-100">
         {% for item in navigation.items %}
           <li class="nav__item">
             <a class="nav__link" href="{{ item.url | default('#') }}">

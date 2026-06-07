@@ -3,6 +3,7 @@
 //import lgFullscreen from 'lightgallery/plugins/fullscreen';
 import "bootstrap/js/dist/modal";
 import Offcanvas from "bootstrap/js/dist/offcanvas";
+import ScrollSpy from "bootstrap/js/dist/scrollspy";
 
 //import Swiper from "swiper";
 //import { Navigation, Pagination, EffectFade, Autoplay } from "swiper/modules";
@@ -40,12 +41,16 @@ document.addEventListener("click", (e) => {
   const offcanvas = Offcanvas.getInstance(offcanvasEl);
   const href = link.getAttribute("href");
 
-  lenis.start();  // запускаем RAF до закрытия, чтобы Lenis был стабилен
+  lenis.start(); // запускаем RAF до закрытия, чтобы Lenis был стабилен
   offcanvas.hide();
 
-  offcanvasEl.addEventListener("hidden.bs.offcanvas", () => {
-    lenis.scrollTo(href, { userData: { isAnchor: true } });
-  }, { once: true });
+  offcanvasEl.addEventListener(
+    "hidden.bs.offcanvas",
+    () => {
+      lenis.scrollTo(href, { userData: { isAnchor: true } });
+    },
+    { once: true },
+  );
 });
 
 // Инициализация при загрузке DOM-дерева
@@ -56,6 +61,29 @@ document.addEventListener("DOMContentLoaded", () => {
   //initTemplateSlider2();
   initScrollAnimations();
   initSmartSticky(lenis);
+
+  enableHorizontalScroll('[data-xscroll]');
+  //enableDragScroll('[data-xscroll]');
+
+    document.querySelectorAll('[data-btncopy]').forEach((btn) => {
+    btn.addEventListener('click', btnCopyHandler);
+  });
+
+  initModalChangeble();
+
+   if (document.querySelector('.window-size')) {
+    (checkWindowSize(), window.addEventListener('resize', checkWindowSize));
+  }
+
+
+
+  const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
+  dataSpyList.forEach((dataSpyEl) => {
+    ScrollSpy.getInstance(dataSpyEl)?.dispose();
+    new ScrollSpy(dataSpyEl, {
+      threshold: [0.1, 0.5, 0.9],
+    });
+  });
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => initTightLists(".prose"));
@@ -129,8 +157,6 @@ function initTemplateSlider2() {
   });
 }
 
-
-
 // Авто-определение однострочных списков
 function initTightLists(container) {
   const root = container ? document.querySelector(container) : document;
@@ -157,11 +183,7 @@ function initTightLists(container) {
 
 function initScrollAnimations() {
   const fx = {
-    fade: [
-      { opacity: 0 },
-      { opacity: 1 },
-      { opacity: 0 },
-    ],
+    fade: [{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }],
     "slide-up": [
       { opacity: 0, y: 40 },
       { opacity: 1, y: 0 },
@@ -214,19 +236,28 @@ function initScrollAnimations() {
       });
 
       tl.to(p, {
-        v: 0, opacity: 1, duration: 0.11, ease: "cubic-bezier(0,0,0.5,1)",
+        v: 0,
+        opacity: 1,
+        duration: 0.11,
+        ease: "cubic-bezier(0,0,0.5,1)",
         onUpdate: () => {
           el.style.filter = `blur(${p.v}px)`;
           el.style.opacity = p.opacity;
         },
-      })
-      .to(p, {
-        v: 8, opacity: 0, duration: 0.1, ease: "cubic-bezier(0,0,0.5,1)",
-        onUpdate: () => {
-          el.style.filter = `blur(${p.v}px)`;
-          el.style.opacity = p.opacity;
+      }).to(
+        p,
+        {
+          v: 8,
+          opacity: 0,
+          duration: 0.1,
+          ease: "cubic-bezier(0,0,0.5,1)",
+          onUpdate: () => {
+            el.style.filter = `blur(${p.v}px)`;
+            el.style.opacity = p.opacity;
+          },
         },
-      }, 0.89);
+        0.89,
+      );
 
       return;
     }
@@ -241,17 +272,24 @@ function initScrollAnimations() {
       });
 
       tl.to(p, {
-        top: 0, duration: 0.11, ease: "cubic-bezier(0,0,0.5,1)",
+        top: 0,
+        duration: 0.11,
+        ease: "cubic-bezier(0,0,0.5,1)",
         onUpdate: () => {
           el.style.clipPath = `inset(${p.top}% 0 ${p.bottom}% 0)`;
         },
-      })
-      .to(p, {
-        bottom: 100, duration: 0.1, ease: "cubic-bezier(0,0,0.5,1)",
-        onUpdate: () => {
-          el.style.clipPath = `inset(${p.top}% 0 ${p.bottom}% 0)`;
+      }).to(
+        p,
+        {
+          bottom: 100,
+          duration: 0.1,
+          ease: "cubic-bezier(0,0,0.5,1)",
+          onUpdate: () => {
+            el.style.clipPath = `inset(${p.top}% 0 ${p.bottom}% 0)`;
+          },
         },
-      }, 0.89);
+        0.89,
+      );
 
       return;
     }
@@ -280,7 +318,158 @@ function initScrollAnimations() {
     //   └─►states[1]◄────────────────────►states[2]
     //   states[0] (предустановлен gsap.set)
 
-    tl.to(el, { ...states[1], duration: 0.11, ease: "cubic-bezier(0,0,0.5,1)" })
-      .to(el, { ...states[2], duration: 0.1, ease: "cubic-bezier(0,0,0.5,1)" }, 0.89);
+    tl.to(el, { ...states[1], duration: 0.11, ease: "cubic-bezier(0,0,0.5,1)" }).to(
+      el,
+      { ...states[2], duration: 0.1, ease: "cubic-bezier(0,0,0.5,1)" },
+      0.89,
+    );
   });
 }
+
+function enableHorizontalScroll(selector) {
+  const elements = document.querySelectorAll(selector);
+
+  elements.forEach((el) => {
+    el.addEventListener('wheel', (e) => {
+      if (el.scrollWidth <= el.clientWidth) return;
+
+      e.stopPropagation();
+      e.preventDefault();
+      el.scrollBy({ left: e.deltaY, behavior: 'smooth' });
+    }, { passive: false });
+  });
+}
+
+function enableDragScroll(selector) {
+  const elements = document.querySelectorAll(selector);
+
+  elements.forEach((el) => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    el.addEventListener('mousedown', (e) => {
+      isDown = true;
+      el.classList.add('dragging');
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+    });
+
+    el.addEventListener('mouseleave', () => {
+      isDown = false;
+      el.classList.remove('dragging');
+    });
+
+    el.addEventListener('mouseup', () => {
+      isDown = false;
+      el.classList.remove('dragging');
+    });
+
+    el.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      const walk = (x - startX) * 1; // скорость
+      el.scrollLeft = scrollLeft - walk;
+    });
+  });
+}
+
+function btnCopyHandler(e) {
+  // Сохраняем элемент в переменную синхронно
+  const targetElement = e.currentTarget;
+
+  // Проверяем существование элемента
+  if (!targetElement) {
+    console.error('Элемент не найден');
+    return;
+  }
+
+  // Извлекаем данные из атрибута
+  const htmlContent = targetElement.getAttribute('data-btncopy');
+  if (!htmlContent) return;
+
+  // Создаем временный контейнер для преобразования HTML в текст
+  const container = document.createElement('div');
+  container.innerHTML = htmlContent;
+
+  // Преобразуем HTML в чистый текст с переносами
+  const formattedText = Array.from(container.childNodes)
+    .map((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent.trim();
+      } else if (node.nodeName === 'BR') {
+        return '\n';
+      }
+      return '';
+    })
+    .join('')
+    .replace(/\s+/g, ' ') // Убираем лишние пробелы
+    .replace(/\n /g, '\n') // Чистим пробелы после переносов
+    .trim();
+
+  // Копируем в буфер обмена
+  navigator.clipboard
+    .writeText(formattedText)
+    .then(() => {
+      console.log('Данные скопированы!');
+
+      // Визуальный фидбек с проверкой существования элемента
+      if (document.body.contains(targetElement)) {
+        targetElement.classList.add('copied');
+        setTimeout(() => {
+          if (document.body.contains(targetElement)) {
+            targetElement.classList.remove('copied');
+          }
+        }, 2000);
+      }
+    })
+    .catch((err) => {
+      console.error('Ошибка копирования:', err);
+    });
+}
+
+const checkWindowSize = () => {
+  const windowSize = document.querySelector('.window-size');
+  windowSize.textContent = window.innerWidth;
+};
+
+// Функция инициализации изменяемых модальных окон
+function initModalChangeble() {
+  const modalChangebleEls = document.querySelectorAll('[data-modal-changeble]');
+
+  modalChangebleEls.forEach((modalEl) => {
+    modalEl.addEventListener('show.bs.modal', (event) => {
+      const button = event.relatedTarget;
+      const newTitle = button.getAttribute('data-modal-title');
+      const newSubTitle = button.getAttribute('data-modal-subtitle');
+      const whomInfo = button.getAttribute('data-whom');
+      const newText = button.getAttribute('data-modal-text');
+      const btnInnerText = button.getAttribute('data-modal-btn-text');
+
+      const modalTitleEl = modalEl.querySelector('[data-modal-title]');
+      const modalSubTitleEl = modalEl.querySelector('[data-modal-subtitle]');
+      const modalTextEl = modalEl.querySelector('[data-modal-text]');
+      const modalWhomEl = modalEl.querySelector('[data-whom]');
+      const modalBtnEl = modalEl.querySelector('[data-modal-btn-text]');
+
+      if (modalTitleEl && newTitle) {
+        modalTitleEl.innerHTML = newTitle;
+      }
+      if (modalSubTitleEl && newSubTitle) {
+        modalSubTitleEl.innerHTML = newSubTitle;
+      }
+      if (modalTextEl && newText) {
+        modalTextEl.innerHTML = newText;
+      }
+      if (modalWhomEl && whomInfo) {
+        modalWhomEl.value = whomInfo;
+      }
+      if (btnInnerText && modalBtnEl) {
+        modalBtnEl.innerText = btnInnerText;
+      }
+    });
+  });
+}
+
+

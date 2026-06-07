@@ -182,8 +182,6 @@ figure {
   }
 }
 
-
-
 p:last-child,
 .lead:last-child,
 li:last-child,
@@ -232,8 +230,8 @@ ul li::marker {
 }
 
 .list-unstyled {
-  li::marker{
-    content:'';
+  li::marker {
+    content: "";
   }
 }
 

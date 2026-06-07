@@ -18,11 +18,11 @@ a {
   text-underline-offset: 0.25em;
   text-decoration-color: rgba(#f96b23, 0.33);
   transition:
-    background-color 0.2s ease-out,
-    border-color 0.2s ease-out,
-    color 0.2s ease-out,
-    text-decoration-color 0.2s ease-out,
-    text-underline-offset 0.2s ease-out;
+    background-color 0.15s cubic-bezier(0, 0, 0.5, 1),
+    border-color 0.15s cubic-bezier(0, 0, 0.5, 1),
+    color 0.15s cubic-bezier(0, 0, 0.5, 1),
+    text-decoration-color 0.15s cubic-bezier(0, 0, 0.5, 1),
+    text-underline-offset 0.15s cubic-bezier(0, 0, 0.5, 1);
 
   &:hover,
   &:focus-visible {

@@ -84,3 +84,22 @@
 .spacer-view {
   height: var(--view, 100dvh);
 }
+
+.no-title {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin-bottom: 0;
+}
+
+.mn-edge {
+  margin-left: var(--value, calc(var(--bs-gutter-x) * -0.5));
+  margin-right: var(--value, calc(var(--bs-gutter-x) * -0.5));
+}
+
+.window-size {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: var(--white);
+}

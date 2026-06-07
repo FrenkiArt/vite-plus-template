@@ -84,9 +84,21 @@
       {# Фавикон и стили #}
       <link rel="icon" type="image/svg+xml" href="assets/svg/vite.svg" />
       <link rel="stylesheet" href="assets/fonts/lato/stylesheet.css" />
+
+      {# Для плавного скролла между страницами #}
+      <script type="speculationrules">
+        {
+            "prefetch": [
+            { "source": "document", "where": { "href_matches": "/*" }, "eagerness": "conservative" }
+            ],
+            "prerender": [
+            { "source": "document", "where": { "href_matches": "/*" }, "eagerness": "moderate" }
+            ]
+        }
+      </script>
     {% endblock %}
   </head>
-  <body>
+  <body id="body">
     {% include "components/header.njk" %}
     {% include "components/sec-nav.njk" %}
 

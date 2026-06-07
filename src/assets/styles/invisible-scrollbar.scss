@@ -1,0 +1,97 @@
+
+.invisible-scrollbar {
+  /* Для Firefox */
+  scrollbar-width: none;
+
+  /* Для Chrome, Safari, Opera и нового Edge */
+  &::-webkit-scrollbar {
+    display: none; /* или можно использовать width: 0; */
+  }
+}
+
+.invisible-scrollbar-friendly {
+  // Важно для Firefox, чтобы полоса прокрутки не была слишком навязчивой
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  // На случай если реализовано перетаскивание
+  //cursor: grab;
+
+  // Задаем постоянную ширину для полосы прокрутки
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  // Фон дорожки (делаем прозрачным)
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  // Ползунок по умолчанию — полностью прозрачный
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0); // Полная прозрачность
+    border-radius: 4px; // Немного скруглим для красоты
+  }
+
+  // Показываем ползунок при наведении ИЛИ когда элемент внутри получил фокус
+  &:hover,
+  &:focus-within {
+    scrollbar-color: var(--color-primary) #ffffff;
+
+    // focus-within лучше, чем focus-visible, для этой задачи
+    &::-webkit-scrollbar-thumb {
+      // Делаем ползунок видимым
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+.invisible-scrollbar.dragging {
+  cursor: grabbing;
+}
+
+
+.wrap-slider-nav {
+  position: relative;
+  //background-color: pink;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    //background-color: var(--bs-body-bg);
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: calc(var(--bs-navbar-nav-link-padding-x) * 2);
+    z-index: 3;
+  }
+
+  &::before {
+    // left: 0;
+    left: calc(var(--bs-navbar-nav-link-padding-x) * (-1));
+    background-image: linear-gradient(
+      to right,
+      var(--bs-body-bg) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  &::after {
+    // right: 0;
+    right: calc(var(--bs-navbar-nav-link-padding-x) * (-1));
+    background-image: linear-gradient(
+      to left,
+      var(--bs-body-bg) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+}
+
+.navbar-nav {
+  padding-left: var(--bs-navbar-nav-link-padding-x);
+  padding-right: var(--bs-navbar-nav-link-padding-x);
+
+  .active, .cur, .current {
+    font-weight: bold;
+  }
+}

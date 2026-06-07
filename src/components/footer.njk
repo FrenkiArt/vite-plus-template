@@ -1,4 +1,6 @@
-<footer id="footer" class="footer">
+
+
+<footer id="footer" class="footer py-5">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -7,7 +9,7 @@
                 <p>{{ site.contacts.working_hours }}</p>
                 <a href="tel:{{ site.contacts.phone_link }}">{{ site.contacts.phone_display }}</a>
                 <a href="mailto:{{ site.contacts.email }}">{{ site.contacts.email }}</a>
-                
+
                 {# Соцсети #}
                 {% if site.social.vk %}<a href="{{ site.social.vk }}" target="_blank" rel="noopener">VK</a>{% endif %}
                 {% if site.social.telegram %}<a href="{{ site.social.telegram }}" target="_blank" rel="noopener">Telegram</a>{% endif %}
@@ -15,7 +17,7 @@
             </div>
         </div>
     </div>
-    
+
     {# JSON-LD Organization #}
     <script type="application/ld+json">
     {
@@ -42,3 +44,6 @@
     }
     </script>
 </footer>
+
+<div class="window-size p-3">size</div>
+

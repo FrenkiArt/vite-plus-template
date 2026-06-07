@@ -1,4 +1,4 @@
-# Проект — Текущее состояние типографики
+# Проект — Текущее состояние
 
 ## Система заголовков (custom-variables.scss)
 
@@ -15,111 +15,92 @@
 ## Вертикальный ритм
 
 - Шаг базовой сетки: **8px**
-- `$paragraph-margin-bottom: 1.5rem` (24px на десктопе = 3 ед.)
-- Все заголовки и `.lead`: `margin-bottom: 1.5rem`
-- `:last-child` сбрасывает нижний отступ у: `p, .lead, li, figure, blockquote, .blockquote, .blockquote-footer`
+- `$paragraph-margin-bottom: 1.5rem`
+- Заголовки и `.lead`: `margin-bottom: 1.5rem`
+- `:last-child` сбрасывает отступ у `p, .lead, li, figure, blockquote, .blockquote, .blockquote-footer`
 
-## text-box (экспериментально)
+## text-box
 
-Все текстовые элементы получают `text-box` только в браузерах с поддержкой (обёрнуто в `@supports`):
-
-```scss
-@supports (text-box: trim-both) {
-  h1–h6,
-  .h1–.h6,
-  .fs-1–6,
-  .display-1–6,
-  p,
-  .lead,
-  blockquote,
-  .blockquote,
-  figcaption,
-  .figure-caption,
-  li,
-  dt,
-  dd,
-  th,
-  td,
-  pre,
-  code,
-  address,
-  small,
-  label,
-  legend,
-  button,
-  .btn {
-    text-box: trim-both ex alphabetic;
-  }
-}
-```
-
-Поддержка: Chrome 133+ (отлично), Safari 18.2+ (отлично, включая `ex`), Edge 133+ (отлично), Firefox — пока нет, но при появлении включится автоматом.
+Все текстовые элементы получают `text-box: trim-both ex alphabetic` в `@supports`. Chrome 133+, Safari 18.2+, Edge 133+.
 
 ## Кнопки и инпуты
 
 - `$input-btn-padding-y: 0.5rem`
-- `$btn-padding-y: calc($input-btn-padding-y + 0.48rem)` — компенсация `text-box` для равенства высоты с инпутами (~48px)
-- Оба компонента должны быть одной высоты благодаря увеличенному padding кнопок.
+- `$btn-padding-y: calc($input-btn-padding-y + 0.478rem)` — компенсация text-box
+- Оба компонента одной высоты (~48px)
 
-## breadcrumb
+## Prose (prose.scss)
 
-- Файл: `breadcrumb.scss`
-- `float: none` на `.breadcrumb-item + .breadcrumb-item::before` (переопределён Bootstrap float)
+- Контейнер `.prose` для статейного контента
+- `> * + * { margin-block-start: 1lh }`
+- `.attach-next` / `.attach-prev` — для изображений, привязанных к соседнему контенту
+- Списки: `ul, ol { padding-left: 1.3em }`, `.tight` класс для уменьшенных отступов
+- `initTightLists(".prose")` в `my.js`
 
-## display-классы
+## Scroll-анимации (GSAP + ScrollTrigger)
 
-- Отключены: `$display-font-sizes: ()` (пустая карта)
-- Если включишь — `text-box` на них уже есть в глобальной группе
+- 7 эффектов: fade, slide-up, slide-left, slide-right, zoom, blur, clip-up
+- Микс через `data-scroll="slide-up zoom"` (space-separated)
+- Easing: `cubic-bezier(0,0,0.5,1)`
+- Blur и clip-up — через proxy-объект с `onUpdate`
+- `will-change` в `animation.scss`, начальные CSS-состояния
 
-## Prose — редакционная типографика (`prose.scss`)
+## Smart sticky header
 
-Изолированный контейнер `.prose` для статейного контента. Отличается от основной сетки:
+- `position: sticky`, `transition: transform` с `cubic-bezier(0,0,0.5,1)`
+- `.sticky-hidden` (translateY(-100%)), `.sticky-shadow`
+- `--header-height` на `html` для anchor offset
+- `sticky-smart.js` — подписка на `lenis.on("scroll")`
+- `will-change: transform` **удалён** (ломает position:fixed у дочерних offcanvas)
 
-- Сбрасывает Bootstrap-отступы внутри, строит ритм заново через `> * + * { margin-block-start: 1lh }`
-- Все маржины — в `lh` (line-height элемента), кратно 8px через дроби
-- Весь код в `.prose { }` для изоляции от глобальных стилей
+## Offcanvas
 
-### attach-логика
+- Bootstrap `offcanvas-start`, внутри хедера
+- Ширина: `$offcanvas-horizontal-width: 30ch` + `max-width: 89%`
+- При открытии → `lenis.stop()`, при закрытии → `lenis.start()`
+- Анкорные ссылки (`a[href^="#"]`): `offcanvas.hide()` → `lenis.scrollTo(href, { userData: { isAnchor: true } })` на `hidden.bs.offcanvas`
+- `lenis.start()` перед `hide()` для стабильного RAF
+- `data-bs-dismiss` убран с `<a>`, импорт `Offcanvas` как default
 
-Классы для изображений, привязанных к соседнему контенту:
+## Меню (site.json → menu2)
 
-| Класс         | Где         | Что делает                                       |
-|---------------|-------------|--------------------------------------------------|
-| `.attach-next` | На `<img>`  | Сбрасывает `margin-bottom: 0`, следующий заголовок получает уменьшенный отступ (`0.5lh–0.67lh` в зависимости от размера) |
-| `.attach-prev`  | На `<img>`  | Идёт после текста, получает уменьшенный верхний отступ (`0.33lh–1lh` в зависимости от предыдущего элемента) |
+- `"hidden": true` — скрыть пункт
+- `"class": "d-lg-none"` — кастомный класс на `<a>`
+- Текущая страница: `<span class="nav-link active" aria-current="page">` вместо ссылки
 
-### Первое изображение + заголовок
+## Навигация
 
-`> img:first-of-type + h1…h6` — автоматически уменьшенный margin-top на заголовке, если статья начинается с картинки.
+- `src/pages/*.njk` — `{% set pageUrl = "/..." %}` для каждой страницы
+- `aria-current="page"` — только при совпадении `item.url == pageUrl`
 
-### Lead после заголовков
+## Импорты Bootstrap JS
 
-Per-heading отступы для `.lead`, стоящего сразу после `h1–h6`:
+- `import "bootstrap/js/dist/modal"` (side-effect, data-api)
+- `import Offcanvas from "bootstrap/js/dist/offcanvas"` (default, `Offcanvas.getInstance()`)
+- `import ScrollSpy from "bootstrap/js/dist/scrollspy"` (default, manual `new ScrollSpy()`)
+- **Не** использовать `import { Modal, ScrollSpy, Offcanvas } from 'bootstrap'` — баррель тянет весь Bootstrap JS (нет `sideEffects: false` в package.json Bootstrap'а)
+- Subpath-импорты: Vite вытряхивает неиспользуемое, только Modal + Offcanvas + ScrollSpy + shared deps
 
-| Селектор        | Main       | Fallback |
-|-----------------|------------|----------|
-| `h1, h2 + .lead` | `1lh` (24px, 3 шага) | `0.33lh` |
-| `h3–h6 + .lead`  | `0.67lh` (16px, 2 шага) | `0.33lh` |
+## Lenis
 
-### Figure глобально (`typograf.scss`)
+- `autoRaf: true`, `anchors: { userData: { isAnchor: true } }`
+- `lenis.on("scroll", ScrollTrigger.update)`
+- Без кастомного wrapper (весь body)
 
-```scss
-figure { margin-bottom: 1.5rem; }
-@supports not (text-box: trim-both) { margin-bottom: 1rem; }
-```
+## Horizontal scroll + drag scroll
 
-### Списки
+- `enableHorizontalScroll('.invisible-scrollbar-friendly, .invisible-scrollbar')` — wheel + Lenis совместимость
+- Проверка `scrollWidth <= clientWidth` — не блокировать page scroll если нет horizontal overflow
+- `e.stopPropagation()` — Lenis не перехватывает wheel на этом элементе
+- `e.preventDefault()` + `behavior: 'smooth'` — плавный скролл
+- `enableDragScroll` — drag-to-scroll с классом `.dragging`
+- `.dragging` в HTML не ставить — `enableDragScroll` сам управляет
 
-- Глобально и в `.prose`: `ul, ol { padding-left: 1.3em }`
-- `li + li` — `1lh` (с `text-box`) / `0.33lh` (без)
-- Исключены из `li + li`: `.breadcrumb-item`, `.list-group-item`, `.nav__item`, а также любые `li` с атрибутом `class` (через `:not([class])`)
-- Класс `.tight` на `<ul>`/`<ol>` — уменьшенный отступ между айтемами (`0.66lh` / `0.17lh` fallback)
-- `initTightLists(".prose")` в `my.js` — авто-добавление `.tight` если все `li` однострочные (запускается после `document.fonts.ready`)
+## Wrap-slider-nav (WIP)
 
-### Шрифты
-
-- Inter через Google Fonts (Fira Code удалён)
-- `base.njk` — единственное место подключения
+- Новый враппер `.wrap-slider-nav` вокруг `<ul>` в оффканвасе
+- `overflow-auto invisible-scrollbar` на `<ul>` — горизонтальный скролл nav-меню
+- Селекторы для `enableHorizontalScroll` / `enableDragScroll` нужно расширить на `.invisible-scrollbar`
 
 ## Полезные команды
 

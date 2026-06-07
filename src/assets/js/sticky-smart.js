@@ -3,10 +3,7 @@ export default function initSmartSticky(lenis) {
   if (!header) return;
 
   function updateHeight() {
-    document.documentElement.style.setProperty(
-      "--header-height",
-      `${header.offsetHeight}px`
-    );
+    document.documentElement.style.setProperty("--header-height", `${header.offsetHeight}px`);
   }
 
   updateHeight();
@@ -23,6 +20,9 @@ export default function initSmartSticky(lenis) {
       header.classList.remove("sticky-hidden");
     }
 
-    header.classList.toggle("sticky-shadow", e.animatedScroll > 0 && !header.classList.contains("sticky-hidden"));
+    header.classList.toggle(
+      "sticky-shadow",
+      e.animatedScroll > 0 && !header.classList.contains("sticky-hidden"),
+    );
   });
 }
