@@ -2,8 +2,7 @@
 //import lightGallery from 'lightgallery';
 //import lgFullscreen from 'lightgallery/plugins/fullscreen';
 import "bootstrap/js/dist/modal";
-import "bootstrap/js/dist/offcanvas";
-import { Offcanvas } from "bootstrap/js/dist/offcanvas";
+import Offcanvas from "bootstrap/js/dist/offcanvas";
 
 //import Swiper from "swiper";
 //import { Navigation, Pagination, EffectFade, Autoplay } from "swiper/modules";
