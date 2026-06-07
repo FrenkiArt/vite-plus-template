@@ -26,6 +26,10 @@ const lenis = new Lenis({
 // Синхронизация Lenis + ScrollTrigger
 lenis.on("scroll", ScrollTrigger.update);
 
+// Стоп Lenis при открытии offcanvas, старт при закрытии
+document.addEventListener("show.bs.offcanvas", () => lenis.stop());
+document.addEventListener("hidden.bs.offcanvas", () => lenis.start());
+
 // Инициализация при загрузке DOM-дерева
 document.addEventListener("DOMContentLoaded", () => {
   // initTelMasks();
