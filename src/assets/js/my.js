@@ -30,6 +30,22 @@ lenis.on("scroll", ScrollTrigger.update);
 document.addEventListener("show.bs.offcanvas", () => lenis.stop());
 document.addEventListener("hidden.bs.offcanvas", () => lenis.start());
 
+// Закрытие offcanvas при клике по анкорной ссылке (#...),
+// затем скролл к цели через Lenis (anchors: true)
+document.addEventListener("click", (e) => {
+  const link = e.target.closest('.offcanvas a[href^="#"]');
+  if (!link) return;
+
+  const offcanvasEl = link.closest(".offcanvas");
+  const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+  const href = link.getAttribute("href");
+
+  offcanvas.hide();
+  offcanvasEl.addEventListener("hidden.bs.offcanvas", () => {
+    window.location.href = href;
+  }, { once: true });
+});
+
 // Инициализация при загрузке DOM-дерева
 document.addEventListener("DOMContentLoaded", () => {
   // initTelMasks();

@@ -14,7 +14,7 @@
     { "title": "Новости", "url": "/news/", "hidden": true },
     { "title": "Контакты", "url": "/contacts/" },
     { "title": "Раздел dev", "url": "/dev/", "hidden": true },
-    { "title": "Типографии", "url": "/#typografy-block", "class": "link-primary", "dismiss": true }
+    { "title": "Типографии", "url": "#typografy-block", "class": "link-primary", "_dismiss": true }
   ],
   "config": {
     "base_url": "/"
