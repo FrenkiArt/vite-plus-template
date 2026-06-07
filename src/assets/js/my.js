@@ -3,6 +3,7 @@
 //import lgFullscreen from 'lightgallery/plugins/fullscreen';
 import "bootstrap/js/dist/modal";
 import "bootstrap/js/dist/offcanvas";
+import { Offcanvas } from "bootstrap/js/dist/offcanvas";
 
 //import Swiper from "swiper";
 //import { Navigation, Pagination, EffectFade, Autoplay } from "swiper/modules";
@@ -37,7 +38,7 @@ document.addEventListener("click", (e) => {
   if (!link) return;
 
   const offcanvasEl = link.closest(".offcanvas");
-  const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+  const offcanvas = Offcanvas.getInstance(offcanvasEl);
   const href = link.getAttribute("href");
 
   offcanvas.hide();
