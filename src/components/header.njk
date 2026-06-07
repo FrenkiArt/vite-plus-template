@@ -19,7 +19,12 @@
           <ul class="navbar-nav justify-content-end flex-grow-1 list-unstyled">
             {% for item in menu2 %}
               <li class="nav-item">
-                <a class="nav-link" {% if item.url == pageUrl %}aria-current="page"{% endif %} href="{{ item.url }}">{{ item.title }}</a>
+                <a
+                  class="nav-link"
+                  {% if item.url == pageUrl %}aria-current="page"{% endif %}
+                  href="{{ item.url }}">
+                    {{ item.title }}
+                </a>
               </li>
             {% endfor %}
           </ul>
