@@ -15,7 +15,7 @@
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body d-flex flex-column flex-lg-row gap-3">
           <ul class="navbar-nav justify-content-end flex-grow-1 list-unstyled">
             {% for item in menu2 %}
               <li class="nav-item">
@@ -28,12 +28,12 @@
               </li>
             {% endfor %}
           </ul>
-          <form class="d-flex mt-3 mt-lg-0 me-lg-3" role="search">
+          <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
             <button class="btn btn-outline-success d-none" type="submit">Искать</button>
           </form>
 
-          <a href="tel:{{ contacts.phone_link }}" class="me-lg-3">
+          <a href="tel:{{ contacts.phone_link }}" class="me-lg-3 d-inline-block">
             {{ contacts.phone_display }}
           </a>
 
