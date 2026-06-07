@@ -42,7 +42,7 @@ document.addEventListener("click", (e) => {
 
   offcanvas.hide();
   offcanvasEl.addEventListener("hidden.bs.offcanvas", () => {
-    window.location.href = href;
+    lenis.scrollTo(href);
   }, { once: true });
 });
 
