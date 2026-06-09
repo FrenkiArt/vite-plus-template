@@ -4,6 +4,7 @@
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/mixins";
+@import "mixins/index";
 
 /*
 button {
@@ -42,6 +43,10 @@ button {
   }
 }
  */
+
+.btn {
+  @include smooth-br($btn-border-radius);
+}
 
 .btn-icon {
   padding: 0.69rem;

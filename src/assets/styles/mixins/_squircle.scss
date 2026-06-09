@@ -3,7 +3,7 @@
 // $max-br — максимальный радиус, после которого глаз перестаёт различать изменения (~9-12%)
 // по умолчанию 40px
 
-@function squircle-k($r, $max-br: 40px) {
+@function squircle-k($r, $max-br: 20px) {
   // нормализуем радиус в диапазон 0–1
   $t: $r / $max-br;
 
@@ -19,7 +19,7 @@
 }
 
 // Миксин сглаживания
-@mixin smooth-br($br, $max-br: 40px) {
+@mixin smooth-br($br, $max-br: 20px) {
   border-radius: $br;
 
   @supports (corner-shape: squircle) {

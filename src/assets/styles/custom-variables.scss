@@ -15,7 +15,7 @@ $black: #000;
 
 $colors: ();
 
-$primary: #f96b23;
+$primary: #f95706;
 $secondary: $gray-300;
 $light: $gray-100;
 $dark: $gray-900;
@@ -27,7 +27,7 @@ $theme-colors: (
   //"info":       $info,
   //"warning":    $warning,
   //"danger":     $danger,
-  //'light': $light,
+  'light': $light,
    //'dark': $dark,
 );
 
@@ -99,9 +99,15 @@ $grid-breakpoints: (
   xxl: 1400px,
 );
 
-$container-max-widths: (
+/* $container-max-widths: (
   sm: 540px,
   md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+); */
+
+$container-max-widths: (
   lg: 960px,
   xl: 1140px,
   xxl: 1320px,

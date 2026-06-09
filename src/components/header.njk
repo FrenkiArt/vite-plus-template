@@ -18,7 +18,7 @@
           </a>
 
           <div class="wrap-slider-nav flex-grow-1 mn-edge mx-lg-0  px-2 px-lg-0 py-lg-1" >
-            <ul class="navbar-nav list-unstyled overflow-auto invisible-scrollbar-friendly" data-xscroll>
+            <ul class="navbar-nav list-unstyled overflow-auto invisible-scrollbar-friendly horizontal-scroll" data-xscroll>
               {% for item in menu2 %}{% if not item.hidden %}
               <li class="nav-item">
                 {% if item.url == pageUrl %}
@@ -42,28 +42,28 @@
 
           <div class="hstack gap-1 flex-wrap flex-lg-nowrap">
             <div class="scale-wrapper">
-              <button class="btn btn-primary btn-icon" aria-label="Поиск">
+              <button class="btn btn-light btn-icon" >
                 <svg class="sprite-icon" aria-hidden="true" style="--width: 1.5rem; --height: 1.5rem;">
-                  <use xlink:href="/assets/svg/spritemap.svg#vite"></use>
+                  <use xlink:href="/assets/svg/spritemap.svg#search"></use>
                 </svg>
               </button>
             </div>
             <div class="scale-wrapper">
-              <button class="btn btn-primary btn-icon" aria-label="Поиск">
+              <button class="btn btn-light btn-icon"  >
                 <svg class="sprite-icon" aria-hidden="true" style="--width: 1.5rem; --height: 1.5rem;">
                   <use xlink:href="/assets/svg/spritemap.svg#javascript"></use>
                 </svg>
               </button>
             </div>
             <div class="scale-wrapper">
-              <button class="btn btn-primary btn-icon" aria-label="Поиск">
+              <button class="btn btn-light btn-icon"  >
                 <svg class="sprite-icon" aria-hidden="true" style="--width: 1.5rem; --height: 1.5rem;">
                   <use xlink:href="/assets/svg/spritemap.svg#burger"></use>
                 </svg>
               </button>
             </div>
 
-            <div class="scale-wrapper"><button type="button" class="btn btn-secondary">secondary</button></div>
+            <div class="scale-wrapper"><button type="button" class="btn btn-primary">Заказать</button></div>
           </div>
         </div>
       </div>

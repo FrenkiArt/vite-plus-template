@@ -1,6 +1,8 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function initScrollAnimations() {
   const fx = {
     fade: [{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }],

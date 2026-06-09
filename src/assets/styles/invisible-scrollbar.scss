@@ -81,6 +81,13 @@
   padding-left: var(--bs-navbar-nav-link-padding-x);
   padding-right: var(--bs-navbar-nav-link-padding-x);
 
+  /* Чтобы скроллбар не занимал место */
+  scrollbar-width: none !important;
+  /* Для Chrome/Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   .active,
   .cur,
   .current {
@@ -88,6 +95,6 @@
   }
 
   @supports (text-box: trim-both) {
-    margin-bottom: -12px;
+    //margin-bottom: -12px;
   }
 }

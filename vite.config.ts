@@ -28,6 +28,10 @@ export default defineConfig(({ mode }) => ({
 
   lint: {
     ignorePatterns: ["dist/**"],
+    env: {
+      browser: true,
+      node: true,
+    },
     rules: {
       "no-unused-vars": "error",
       "no-undef": "error",

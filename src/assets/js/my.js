@@ -1,4 +1,4 @@
-// import IMask from 'imask';
+import IMask from "imask";
 //import lightGallery from 'lightgallery';
 //import lgFullscreen from 'lightgallery/plugins/fullscreen';
 import "bootstrap/js/dist/modal";
@@ -8,12 +8,9 @@ import ScrollSpy from "bootstrap/js/dist/scrollspy";
 //import Swiper from "swiper";
 //import { Navigation, Pagination, EffectFade, Autoplay } from "swiper/modules";
 import Lenis from "lenis";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import initSmartSticky from "./sticky-smart.js";
 import initScrollAnimations from "./scroll-animations.js";
-
-gsap.registerPlugin(ScrollTrigger);
 
 //Swiper.use([Navigation, Pagination, EffectFade, Autoplay]);
 
@@ -26,7 +23,7 @@ const lenis = new Lenis({
 });
 
 // Синхронизация Lenis + ScrollTrigger
-lenis.on("scroll", ScrollTrigger.update);
+lenis.on("scroll", () => ScrollTrigger.update());
 
 // Стоп Lenis при открытии offcanvas, старт при закрытии
 document.addEventListener("show.bs.offcanvas", () => lenis.stop());
@@ -56,7 +53,7 @@ document.addEventListener("click", (e) => {
 
 // Инициализация при загрузке DOM-дерева
 document.addEventListener("DOMContentLoaded", () => {
-  // initTelMasks();
+  initTelMasks();
   // initLightGalleries();
   //initTemplateSlider();
   //initTemplateSlider2();
@@ -73,7 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initModalChangeble();
 
   if (document.querySelector(".window-size")) {
-    (checkWindowSize(), window.addEventListener("resize", checkWindowSize));
+    checkWindowSize();
+    window.addEventListener("resize", checkWindowSize);
   }
 
   const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
@@ -102,21 +100,26 @@ function initTelMasks() {
 }
 
 // Функция инициализации галерей изображений
+// eslint-disable-next-line no-unused-vars
 function initLightGalleries() {
   const galleryElements = document.querySelectorAll("[data-gallery]");
   galleryElements.forEach((el) => {
+    // eslint-disable-next-line no-undef
     lightGallery(el, {
       licenseKey: "0000 0000 0000 0000",
       download: false,
       fullScreen: false,
+      // eslint-disable-next-line no-undef
       plugins: [lgFullscreen],
       selector: "[data-src]",
     });
   });
 }
 
+// eslint-disable-next-line no-unused-vars
 function initTemplateSlider() {
-  const slider = new Swiper(".slider-template", {
+  // eslint-disable-next-line no-undef
+  const _slider = new Swiper(".slider-template", {
     loop: true,
     spaceBetween: 0,
     slidesPerView: 1,
@@ -139,8 +142,10 @@ function initTemplateSlider() {
   });
 }
 
+// eslint-disable-next-line no-unused-vars
 function initTemplateSlider2() {
-  const slider = new Swiper(".slider-template2", {
+  // eslint-disable-next-line no-undef
+  const _slider = new Swiper(".slider-template2", {
     loop: true,
     slidesPerView: 1,
     spaceBetween: 0,
@@ -198,6 +203,7 @@ function enableHorizontalScroll(selector) {
   });
 }
 
+// eslint-disable-next-line no-unused-vars
 function enableDragScroll(selector) {
   const elements = document.querySelectorAll(selector);
 
