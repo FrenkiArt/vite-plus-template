@@ -17,7 +17,7 @@
             {{ logo.title | default('') }}
           </a>
 
-          <div class="wrap-slider-nav flex-grow-1 mn-edge mx-lg-0  px-2 px-lg-0 py-lg-1 " >
+          <div class="wrap-slider-nav flex-grow-1 mn-edge mx-lg-0  px-2 px-lg-0 py-lg-1" >
             <ul class="navbar-nav list-unstyled overflow-auto invisible-scrollbar-friendly" data-xscroll>
               {% for item in menu2 %}{% if not item.hidden %}
               <li class="nav-item">
@@ -40,16 +40,30 @@
             {{ contacts.phone_display }}
           </a>
 
-          <div class="hstack gap-2">
-            <svg class="sprite-icon">
-              <use xlink:href="assets/svg/spritemap.svg#vite"></use>
-            </svg>
-            <svg class="sprite-icon text-primary">
-              <use xlink:href="assets/svg/spritemap.svg#burger"></use>
-            </svg>
-            <svg class="sprite-icon">
-              <use xlink:href="assets/svg/spritemap.svg#javascript"></use>
-            </svg>
+          <div class="hstack gap-1 flex-wrap flex-lg-nowrap">
+            <div class="scale-wrapper">
+              <button class="btn btn-primary btn-icon" aria-label="Поиск">
+                <svg class="sprite-icon" aria-hidden="true" style="--width: 1.5rem; --height: 1.5rem;">
+                  <use xlink:href="/assets/svg/spritemap.svg#vite"></use>
+                </svg>
+              </button>
+            </div>
+            <div class="scale-wrapper">
+              <button class="btn btn-primary btn-icon" aria-label="Поиск">
+                <svg class="sprite-icon" aria-hidden="true" style="--width: 1.5rem; --height: 1.5rem;">
+                  <use xlink:href="/assets/svg/spritemap.svg#javascript"></use>
+                </svg>
+              </button>
+            </div>
+            <div class="scale-wrapper">
+              <button class="btn btn-primary btn-icon" aria-label="Поиск">
+                <svg class="sprite-icon" aria-hidden="true" style="--width: 1.5rem; --height: 1.5rem;">
+                  <use xlink:href="/assets/svg/spritemap.svg#burger"></use>
+                </svg>
+              </button>
+            </div>
+
+            <div class="scale-wrapper"><button type="button" class="btn btn-secondary">secondary</button></div>
           </div>
         </div>
       </div>

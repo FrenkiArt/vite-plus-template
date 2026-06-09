@@ -42,13 +42,13 @@
   <section id="" class="uni-sec">
     <div class="container">
       <div class="row g-3">
-        <div class="col-12">
+        <div class="col-12" data-scroll="blur slide-up">
           <h2 class="sec-title">Заголовок секции  </h2>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4" data-scroll="blur slide-up">
           <p>Разнообр  а начало повседневной работы по формированию позиции влечёт за собой интересный процесс внедрения модернизации новых принципов формирования материально-технической и кадровой базы.</p>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4" data-scroll="blur slide-up">
           <p>Следует ист    гресса профессионального общества.</p>
           <ul>
             <li>sdfkdsf dsf kljsd flkjdsf </li>
@@ -59,7 +59,7 @@
             <li>dsfds  sdflkjdfsdsfjkl dsfklj</li>
           </ul>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4" data-scroll="blur slide-up">
           <p>Не следуе оответствующей насущным потребностям.</p>
 
            <ol>
@@ -78,7 +78,7 @@
   <section id="" class="uni-sec">
     <div class="container">
       <div class="row g-3">
-        <div class="col-12">
+        <div class="col-12" data-scroll="blur slide-up">
           <h2>Заголовок секции</h2>
         </div>
       </div>
@@ -221,17 +221,6 @@
           </ul>
         </div>
 
-
-
-         <div class="col-6">
-          <div class="display-1">Типография</div>
-          <div class="display-2">Типография</div>
-          <div class="display-3">Типография</div>
-          <div class="display-4">Типография</div>
-          <div class="display-5">Типография</div>
-          <div class="display-6">Типография</div>
-         </div>
-
         <div class="col-3">
           <div class="card"  >
             <img src="assets/img/og-image.jpg" loading="lazy" class="card-img-top  " alt="">
@@ -336,6 +325,15 @@
 
         </div>
 
+        <div class="col-auto">
+          <div class="display-1">Типография</div>
+          <div class="display-2">Типография</div>
+          <div class="display-3">Типография</div>
+          <div class="display-4">Типография</div>
+          <div class="display-5">Типография</div>
+          <div class="display-6">Типография</div>
+         </div>
+
         <div class="col-4">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">@</span>
@@ -352,17 +350,17 @@
         <div class="col-12"> <div class="spacer-view" style="--view: 50vh;"></div></div>
 
         <div class="col-3">
-          <div data-scroll="fade" data-scroll-range="20% 120%">
+          <div data-scroll="fade"  >
             Fade-in/out block
           </div>
         </div>
         <div class="col-3">
-          <div data-scroll="slide-up" data-scroll-range="0% 150%">
+          <div data-scroll="slide-up" >
             Slide-up block
           </div>
         </div>
         <div class="col-3">
-          <div data-scroll="zoom" data-scroll-range="10% 110%">
+          <div data-scroll="zoom" >
             Zoom block
           </div>
         </div>
@@ -388,42 +386,56 @@
 
         <div class="col-12"><div class="spacer-view"  style="--view: 25vh;"></div></div>
 
-        <div class="col-4">
+        <div class="col-3">
+          <div data-scroll="blur slide-up zoom">
+            Slide-up and Blur and Zoom
+          </div>
+        </div>
+
+        <div class="col-3">
           <div data-scroll="slide-up zoom">slide-up + zoom</div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <div data-scroll="slide-left zoom">slide-left + zoom</div>
         </div>
-        <div class="col-4">
-          <div data-scroll="slide-right zoom">slide-right + zoom</div>
+        <div class="col-3">
+          <div class="d-inline-flex" data-scroll="slide-right zoom">slide-right + zoom</div>
         </div>
 
         <div class="col-12"><div class="spacer-view"  style="--view: 50vh;"></div></div>
 
         <div class="col-auto">
-          <button type="button" class="btn btn-secondary">Base class</button>
+          <div class="hstack gap-2 flex-wrap h-scale-group">
+            <div class="h-scale-wrap">
+              <button type="button" class="h-scale-item btn btn-primary">btn-primary</button>
+            </div>
+            <div class="h-scale-wrap">
+              <button type="button" class="h-scale-item btn btn-outline-primary">btn-outline-primary</button>
+            </div>
+            <div class="h-scale-wrap">
+              <button type="button" class="h-scale-item btn btn-secondary">btn-secondary</button>
+            </div>
+            <div class="h-scale-wrap">
+              <button type="button" class="h-scale-item btn btn-outline-secondary">btn-outline-secondary</button>
+            </div>
+          </div>
         </div>
 
-        <div class="col-2">
-          <div class="test-block">hehehe</div>
-        </div>
-
-
-        <div class="col-6">
-          11111111 111111 11111 11111111 11111 1 1111111 111111 11111 11111111
-          11111 1 1 1 1 1 1 1 1
-        </div>
-        <div class="col-3">
-          11111111 111111 11111 11111111 11111 1 1111111 111111 11111 11111111
-          11111 1 1 1 1 1 1 1 1
-        </div>
-        <div class="col-3">
-          11111111 111111 11111 11111111 11111 1 1111111 111111 11111 11111111
-          11111 1 1 1 1 1 1 1 1
-
-          <a href="#" class="link-primary">link-primary</a>
-          <a href="#" class="link">link</a>
-          <a href="#" class="">Просто ссылка</a>
+        <div class="col-auto">
+          <div class="hstack gap-2 flex-wrap  ">
+            <div class="scale-wrapper">
+              <button type="button" class="btn btn-primary">btn-primary</button>
+            </div>
+            <div class="scale-wrapper">
+              <button type="button" class="btn btn-outline-primary">btn-outline-primary</button>
+            </div>
+            <div class="scale-wrapper">
+              <button type="button" class="btn btn-secondary">btn-secondary</button>
+            </div>
+            <div class="scale-wrapper">
+              <button type="button" class="btn btn-outline-secondary">btn-outline-secondary</button>
+            </div>
+          </div>
         </div>
 
         <div class="col-12 col-xs-4 col-sm-6 col-md-auto text-bg-newcolor">
@@ -437,6 +449,7 @@
             <div class="fs-3 text-green fw-semibold">test rounded</div>
           </div>
         </div>
+
         <div class="col-12 col-md-5">
           <div
             class="rounded-5 p-5 text-bg-secondary ar-1x1 ar-sm-4x3 ar-md-16x9 ar-lg-21x9 mw-md-50"
@@ -465,20 +478,6 @@
           <button type="button" class="btn btn-accent">button</button>
           <button type="button" class="btn btn-danger">btn-danger</button>
           <button type="button" class="btn btn-dark">btn-dark</button>
-        </div>
-
-        <div class="col-12 d-none">
-          <div class="grid text-center" style="--bs-gap: 0.5rem">
-            <div class="g-col-6 g-col-md-4 text-bg-secondary">
-              .g-col-6 .g-col-md-4
-            </div>
-            <div class="g-col-6 g-col-md-4 text-bg-secondary">
-              .g-col-6 .g-col-md-4
-            </div>
-            <div class="g-col-6 g-col-md-4 text-bg-secondary">
-              .g-col-6 .g-col-md-4
-            </div>
-          </div>
         </div>
 
         <div class="col-12">

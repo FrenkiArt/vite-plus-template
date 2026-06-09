@@ -1,6 +1,7 @@
-@import 'mixins';
+@import "mixins";
 
-.modal-backdrop, .offcanvas-backdrop {
+.modal-backdrop,
+.offcanvas-backdrop {
   backdrop-filter: blur(8px);
 
   /*  p:last-of-type {
@@ -12,12 +13,8 @@
   @include smooth-br(30px);
 }
 
-.modal-header {
-
-
-
+/* .modal-header {
   .btn-close {
     //margin-top: 0.25rem;
   }
-}
-
+} */

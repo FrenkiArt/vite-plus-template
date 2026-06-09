@@ -5,6 +5,7 @@
   --swiper-theme-color: var(--color-primary);
   --swiper-pagination-bullet-horizontal-gap: 10px;
   --header-height: 0px;
+  accent-color: $primary;
   interpolate-size: allow-keywords;
   font-size: 12px;
 
@@ -162,7 +163,6 @@ svg {
 [data-gallery] [data-src] {
   cursor: zoom-in;
 }
-
 
 @view-transition {
   navigation: auto;

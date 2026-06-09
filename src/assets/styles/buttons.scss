@@ -43,12 +43,24 @@ button {
 }
  */
 
+.btn-icon {
+  padding: 0.69rem;
+  aspect-ratio: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  @supports not (text-box: trim-both) {
+    padding: var(--bs-btn-padding-y) var(--bs-btn-padding-y);
+  }
+}
 
 .copied {
   position: relative;
 
   &::after {
-    content: '✓ Скопировано!';
+    content: "✓ Скопировано!";
     position: absolute;
     top: -30px;
     left: 50%;

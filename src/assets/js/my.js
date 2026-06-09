@@ -11,6 +11,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import initSmartSticky from "./sticky-smart.js";
+import initScrollAnimations from "./scroll-animations.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,20 +63,18 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollAnimations();
   initSmartSticky(lenis);
 
-  enableHorizontalScroll('[data-xscroll]');
+  enableHorizontalScroll("[data-xscroll]");
   //enableDragScroll('[data-xscroll]');
 
-    document.querySelectorAll('[data-btncopy]').forEach((btn) => {
-    btn.addEventListener('click', btnCopyHandler);
+  document.querySelectorAll("[data-btncopy]").forEach((btn) => {
+    btn.addEventListener("click", btnCopyHandler);
   });
 
   initModalChangeble();
 
-   if (document.querySelector('.window-size')) {
-    (checkWindowSize(), window.addEventListener('resize', checkWindowSize));
+  if (document.querySelector(".window-size")) {
+    (checkWindowSize(), window.addEventListener("resize", checkWindowSize));
   }
-
-
 
   const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
   dataSpyList.forEach((dataSpyEl) => {
@@ -181,162 +180,21 @@ function initTightLists(container) {
   }
 }
 
-function initScrollAnimations() {
-  const fx = {
-    fade: [{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }],
-    "slide-up": [
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0 },
-      { opacity: 0, y: -40 },
-    ],
-    zoom: [
-      { opacity: 0, scale: 0.8 },
-      { opacity: 1, scale: 1 },
-      { opacity: 0, scale: 1.2 },
-    ],
-    "slide-left": [
-      { opacity: 0, x: 80 },
-      { opacity: 1, x: 0 },
-      { opacity: 0, x: -80 },
-    ],
-    "slide-right": [
-      { opacity: 0, x: -80 },
-      { opacity: 1, x: 0 },
-      { opacity: 0, x: 80 },
-    ],
-  };
-
-  function mergeStates(names) {
-    const out = [{}, {}, {}];
-    names.forEach((name) => {
-      const s = fx[name];
-      if (s) {
-        out[0] = { ...out[0], ...s[0] };
-        out[1] = { ...out[1], ...s[1] };
-        out[2] = { ...out[2], ...s[2] };
-      }
-    });
-    return out;
-  }
-
-  gsap.utils.toArray("[data-scroll]").forEach((el) => {
-    const raw = el.dataset.scroll || "slide-up";
-    const names = raw.split(/\s+/);
-    const start = el.dataset.scrollStart || "bottom bottom";
-    const end = el.dataset.scrollEnd || "top top";
-
-    // ═══ blur ═══
-    if (names.length === 1 && names[0] === "blur") {
-      const p = { v: 8, opacity: 0 };
-      el.style.filter = "blur(8px)";
-      el.style.opacity = 0;
-
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: el, start, end, scrub: true },
-      });
-
-      tl.to(p, {
-        v: 0,
-        opacity: 1,
-        duration: 0.11,
-        ease: "cubic-bezier(0,0,0.5,1)",
-        onUpdate: () => {
-          el.style.filter = `blur(${p.v}px)`;
-          el.style.opacity = p.opacity;
-        },
-      }).to(
-        p,
-        {
-          v: 8,
-          opacity: 0,
-          duration: 0.1,
-          ease: "cubic-bezier(0,0,0.5,1)",
-          onUpdate: () => {
-            el.style.filter = `blur(${p.v}px)`;
-            el.style.opacity = p.opacity;
-          },
-        },
-        0.89,
-      );
-
-      return;
-    }
-
-    // ═══ clip-up ═══
-    if (names.length === 1 && names[0] === "clip-up") {
-      const p = { top: 100, bottom: 0 };
-      el.style.clipPath = "inset(100% 0 0 0)";
-
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: el, start, end, scrub: true },
-      });
-
-      tl.to(p, {
-        top: 0,
-        duration: 0.11,
-        ease: "cubic-bezier(0,0,0.5,1)",
-        onUpdate: () => {
-          el.style.clipPath = `inset(${p.top}% 0 ${p.bottom}% 0)`;
-        },
-      }).to(
-        p,
-        {
-          bottom: 100,
-          duration: 0.1,
-          ease: "cubic-bezier(0,0,0.5,1)",
-          onUpdate: () => {
-            el.style.clipPath = `inset(${p.top}% 0 ${p.bottom}% 0)`;
-          },
-        },
-        0.89,
-      );
-
-      return;
-    }
-
-    // ═══ mix или одиночный эффект ═══
-    const states = mergeStates(names);
-
-    gsap.set(el, states[0]);
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start,
-        end,
-        scrub: true,
-      },
-    });
-
-    // Таймлайн маппится на start→end (от низа экрана до верха).
-    // duration — доля этого диапазона.
-    // Второй параметр .to() — позиция старта на таймлайне.
-    //
-    //   0% ───────────────────────────── 100%  ← скролл от start до end
-    //   │  вхoд  │          холд          │выход│
-    //   │  11%   │          78%           │ 11% │
-    //   └─►states[1]◄────────────────────►states[2]
-    //   states[0] (предустановлен gsap.set)
-
-    tl.to(el, { ...states[1], duration: 0.11, ease: "cubic-bezier(0,0,0.5,1)" }).to(
-      el,
-      { ...states[2], duration: 0.1, ease: "cubic-bezier(0,0,0.5,1)" },
-      0.89,
-    );
-  });
-}
-
 function enableHorizontalScroll(selector) {
   const elements = document.querySelectorAll(selector);
 
   elements.forEach((el) => {
-    el.addEventListener('wheel', (e) => {
-      if (el.scrollWidth <= el.clientWidth) return;
+    el.addEventListener(
+      "wheel",
+      (e) => {
+        if (el.scrollWidth <= el.clientWidth) return;
 
-      e.stopPropagation();
-      e.preventDefault();
-      el.scrollBy({ left: e.deltaY, behavior: 'smooth' });
-    }, { passive: false });
+        e.stopPropagation();
+        e.preventDefault();
+        el.scrollBy({ left: e.deltaY, behavior: "smooth" });
+      },
+      { passive: false },
+    );
   });
 }
 
@@ -348,24 +206,24 @@ function enableDragScroll(selector) {
     let startX;
     let scrollLeft;
 
-    el.addEventListener('mousedown', (e) => {
+    el.addEventListener("mousedown", (e) => {
       isDown = true;
-      el.classList.add('dragging');
+      el.classList.add("dragging");
       startX = e.pageX - el.offsetLeft;
       scrollLeft = el.scrollLeft;
     });
 
-    el.addEventListener('mouseleave', () => {
+    el.addEventListener("mouseleave", () => {
       isDown = false;
-      el.classList.remove('dragging');
+      el.classList.remove("dragging");
     });
 
-    el.addEventListener('mouseup', () => {
+    el.addEventListener("mouseup", () => {
       isDown = false;
-      el.classList.remove('dragging');
+      el.classList.remove("dragging");
     });
 
-    el.addEventListener('mousemove', (e) => {
+    el.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - el.offsetLeft;
@@ -381,16 +239,16 @@ function btnCopyHandler(e) {
 
   // Проверяем существование элемента
   if (!targetElement) {
-    console.error('Элемент не найден');
+    console.error("Элемент не найден");
     return;
   }
 
   // Извлекаем данные из атрибута
-  const htmlContent = targetElement.getAttribute('data-btncopy');
+  const htmlContent = targetElement.getAttribute("data-btncopy");
   if (!htmlContent) return;
 
   // Создаем временный контейнер для преобразования HTML в текст
-  const container = document.createElement('div');
+  const container = document.createElement("div");
   container.innerHTML = htmlContent;
 
   // Преобразуем HTML в чистый текст с переносами
@@ -398,60 +256,60 @@ function btnCopyHandler(e) {
     .map((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
         return node.textContent.trim();
-      } else if (node.nodeName === 'BR') {
-        return '\n';
+      } else if (node.nodeName === "BR") {
+        return "\n";
       }
-      return '';
+      return "";
     })
-    .join('')
-    .replace(/\s+/g, ' ') // Убираем лишние пробелы
-    .replace(/\n /g, '\n') // Чистим пробелы после переносов
+    .join("")
+    .replace(/\s+/g, " ") // Убираем лишние пробелы
+    .replace(/\n /g, "\n") // Чистим пробелы после переносов
     .trim();
 
   // Копируем в буфер обмена
   navigator.clipboard
     .writeText(formattedText)
     .then(() => {
-      console.log('Данные скопированы!');
+      console.log("Данные скопированы!");
 
       // Визуальный фидбек с проверкой существования элемента
       if (document.body.contains(targetElement)) {
-        targetElement.classList.add('copied');
+        targetElement.classList.add("copied");
         setTimeout(() => {
           if (document.body.contains(targetElement)) {
-            targetElement.classList.remove('copied');
+            targetElement.classList.remove("copied");
           }
         }, 2000);
       }
     })
     .catch((err) => {
-      console.error('Ошибка копирования:', err);
+      console.error("Ошибка копирования:", err);
     });
 }
 
 const checkWindowSize = () => {
-  const windowSize = document.querySelector('.window-size');
+  const windowSize = document.querySelector(".window-size");
   windowSize.textContent = window.innerWidth;
 };
 
 // Функция инициализации изменяемых модальных окон
 function initModalChangeble() {
-  const modalChangebleEls = document.querySelectorAll('[data-modal-changeble]');
+  const modalChangebleEls = document.querySelectorAll("[data-modal-changeble]");
 
   modalChangebleEls.forEach((modalEl) => {
-    modalEl.addEventListener('show.bs.modal', (event) => {
+    modalEl.addEventListener("show.bs.modal", (event) => {
       const button = event.relatedTarget;
-      const newTitle = button.getAttribute('data-modal-title');
-      const newSubTitle = button.getAttribute('data-modal-subtitle');
-      const whomInfo = button.getAttribute('data-whom');
-      const newText = button.getAttribute('data-modal-text');
-      const btnInnerText = button.getAttribute('data-modal-btn-text');
+      const newTitle = button.getAttribute("data-modal-title");
+      const newSubTitle = button.getAttribute("data-modal-subtitle");
+      const whomInfo = button.getAttribute("data-whom");
+      const newText = button.getAttribute("data-modal-text");
+      const btnInnerText = button.getAttribute("data-modal-btn-text");
 
-      const modalTitleEl = modalEl.querySelector('[data-modal-title]');
-      const modalSubTitleEl = modalEl.querySelector('[data-modal-subtitle]');
-      const modalTextEl = modalEl.querySelector('[data-modal-text]');
-      const modalWhomEl = modalEl.querySelector('[data-whom]');
-      const modalBtnEl = modalEl.querySelector('[data-modal-btn-text]');
+      const modalTitleEl = modalEl.querySelector("[data-modal-title]");
+      const modalSubTitleEl = modalEl.querySelector("[data-modal-subtitle]");
+      const modalTextEl = modalEl.querySelector("[data-modal-text]");
+      const modalWhomEl = modalEl.querySelector("[data-whom]");
+      const modalBtnEl = modalEl.querySelector("[data-modal-btn-text]");
 
       if (modalTitleEl && newTitle) {
         modalTitleEl.innerHTML = newTitle;
@@ -471,5 +329,3 @@ function initModalChangeble() {
     });
   });
 }
-
-

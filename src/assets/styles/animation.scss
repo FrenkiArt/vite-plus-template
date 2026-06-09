@@ -2,27 +2,27 @@
   will-change: opacity, transform;
   opacity: 0;
 
-  &[data-scroll="fade"] {
+  &[data-scroll~="fade"] {
     opacity: 0;
   }
-  &[data-scroll="slide-up"] {
+  &[data-scroll~="slide-up"] {
     transform: translateY(40px);
   }
-  &[data-scroll="slide-left"] {
+  &[data-scroll~="slide-left"] {
     transform: translateX(80px);
   }
-  &[data-scroll="slide-right"] {
+  &[data-scroll~="slide-right"] {
     transform: translateX(-80px);
   }
-  &[data-scroll="zoom"] {
+  &[data-scroll~="zoom"] {
     transform: scale(0.8);
   }
-  &[data-scroll="blur"] {
+  &[data-scroll~="blur"] {
     opacity: 0;
     filter: blur(8px);
     transform: translateZ(0);
   }
-  &[data-scroll="clip-up"] {
+  &[data-scroll~="clip-up"] {
     opacity: 1;
     clip-path: inset(100% 0 0 0);
   }

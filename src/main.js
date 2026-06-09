@@ -28,3 +28,4 @@ import "lenis/dist/lenis.css";
 //import './assets/js/shortened.js';
 
 import "./assets/js/my.js";
+//import "./assets/js/hover-scale.js";
