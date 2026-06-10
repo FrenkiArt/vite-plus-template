@@ -66,13 +66,13 @@
 
   &::before {
     // left: 0;
-    left: calc(var(--bs-navbar-nav-link-padding-x) * (-1));
+    left: calc(var(--bs-navbar-nav-link-padding-x) * (0));
     background-image: linear-gradient(to right, var(--bs-body-bg) 0%, rgba(255, 255, 255, 0) 100%);
   }
 
   &::after {
     // right: 0;
-    right: calc(var(--bs-navbar-nav-link-padding-x) * (-1));
+    right: calc(var(--bs-navbar-nav-link-padding-x) * (0));
     background-image: linear-gradient(to left, var(--bs-body-bg) 0%, rgba(255, 255, 255, 0) 100%);
   }
 }
