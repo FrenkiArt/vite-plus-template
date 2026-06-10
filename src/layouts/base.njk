@@ -105,12 +105,9 @@
     {# Основной контент страницы — будет подставляться из дочерних шаблонов #}
     <main id="app" class="page">{% block content %}{% endblock %}</main>
 
+    <div class="py-5">{# Спейсер снизу перед футером #}</div>
+    {% include "components/bottom-nav.njk" %}
     {% include "components/footer.njk" %}
-
-    {# Общая иконка и скрипт (можно оставить здесь) #}
-    <svg class="sprite-icon text-primary">
-      <use xlink:href="assets/svg/sprite.svg#geo"></use>
-    </svg>
 
     <script defer type="module" src="/src/main.js"></script>
   </body>

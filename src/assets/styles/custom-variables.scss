@@ -55,13 +55,13 @@ $spacers: (
   3: $spacer,
   //3_5: $spacer * 1.25,
   4: $spacer * 1.5,
-  //5: $spacer * 2,
-  //6: $spacer * 2.5,
-  7: $spacer * 3,
-  //8: $spacer * 3.5,
+  5: $spacer * 2,
+  6: $spacer * 2.5,
+  //7: $spacer * 3,
+  7: $spacer * 3.5,
   //9: $spacer * 4,
   //10: $spacer * 4.5,
-  11: $spacer * 5,
+  //11: $spacer * 5,
 );
 
 $position-values: (
@@ -71,8 +71,8 @@ $position-values: (
 );
 
 $body-color: #212529;
-// $body-bg: #fffcfa;
-$body-bg: #ffffff;
+$body-bg: #fffcfa;
+//$body-bg: $white;
 
 $link-color: $primary;
 $link-decoration: underline;
@@ -98,14 +98,6 @@ $grid-breakpoints: (
   xl: 1200px,
   xxl: 1400px,
 );
-
-/* $container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1320px,
-); */
 
 $container-max-widths: (
   lg: 960px,

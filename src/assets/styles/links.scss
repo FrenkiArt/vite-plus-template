@@ -38,6 +38,30 @@ a {
   &:hover,
   &:focus-visible {
     --bs-link-underline-opacity: 1;
-    //color: color-mix(in srgb, currentColor 100%, transparent);
+  }
+}
+
+.link-bottom-nav {
+  align-items: center;
+  color: var(--bs-secondary-color);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 0.6875rem;
+  gap: 0.25rem;
+  justify-content: center;
+  line-height: 1;
+  padding: 0.5rem 0;
+  text-decoration: none;
+
+
+  &:hover,
+  &:focus-visible,
+  &.active {
+    color: var(--bs-primary);
+  }
+
+  &.active {
+    font-weight: 600;
   }
 }

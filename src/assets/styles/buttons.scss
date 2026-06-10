@@ -45,7 +45,7 @@ button {
  */
 
 .btn {
-  @include smooth-br($btn-border-radius);
+  @include smooth-br($btn-border-radius, 20px);
 }
 
 .btn-icon {

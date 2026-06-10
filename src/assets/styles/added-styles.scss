@@ -80,6 +80,8 @@
   height: var(--view, 100dvh);
 }
 
+
+
 .no-title {
   font-size: inherit;
   font-weight: inherit;
@@ -97,4 +99,6 @@
   bottom: 0;
   left: 0;
   background-color: var(--white);
+  z-index: 1050;
 }
+

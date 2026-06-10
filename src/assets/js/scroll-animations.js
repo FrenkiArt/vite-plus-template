@@ -54,8 +54,9 @@ export default function initScrollAnimations() {
   gsap.utils.toArray("[data-scroll]").forEach((el) => {
     const raw = el.dataset.scroll || "slide-up";
     const names = raw.split(/\s+/);
-    const start = el.dataset.scrollStart || "top 89%";
-    const end = el.dataset.scrollEnd || "bottom 11%";
+    //const start = el.dataset.scrollStart || "top bottom";
+    const start = el.dataset.scrollStart || "top 94%";
+    const end = el.dataset.scrollEnd || "bottom 4%";
 
     const states = mergeStates(names);
 
