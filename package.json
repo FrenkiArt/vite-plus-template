@@ -23,7 +23,7 @@
     "@vituum/vite-plugin-nunjucks": "^2.0.1",
     "autoprefixer": "^10.5.0",
     "oxfmt": "^0.55.0",
-    "oxlint": "^1.70.0",
+    "oxlint": "^1.71.0",
     "path": "^0.12.7",
     "postcss": "^8.5.15",
     "rollup-plugin-visualizer": "^7.0.1",
