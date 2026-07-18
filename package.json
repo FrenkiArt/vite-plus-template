@@ -21,7 +21,7 @@
   "devDependencies": {
     "@spiriit/vite-plugin-svg-spritemap": "^7.0.0",
     "@vituum/vite-plugin-nunjucks": "^2.0.1",
-    "autoprefixer": "^10.5.2",
+    "autoprefixer": "^10.5.4",
     "oxfmt": "^0.58.0",
     "oxlint": "^1.72.0",
     "path": "^0.12.7",
