@@ -22,7 +22,7 @@
     "@spiriit/vite-plugin-svg-spritemap": "^7.0.1",
     "@vituum/vite-plugin-nunjucks": "^2.0.1",
     "autoprefixer": "^10.5.4",
-    "oxfmt": "^0.61.0",
+    "oxfmt": "^0.62.0",
     "oxlint": "^1.76.0",
     "path": "^0.12.7",
     "postcss": "^8.5.23",
